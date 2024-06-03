@@ -130,6 +130,8 @@
     <ClCompile Include="AstarGrid.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="mci.cpp" />
     <ClCompile Include="Single.cpp" />
   </ItemGroup>
@@ -138,6 +140,7 @@
     <ClInclude Include="console.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="define.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="mci.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Single.h" />

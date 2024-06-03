@@ -1,8 +1,9 @@
+#pragma comment(lib, "winmm.lib")
 #include <Windows.h>
 #include <mmsystem.h>
 #include <Digitalv.h>
 #include <string>
-#include "mci.h";
+#include "mci.h"
 
 UINT BGMid;
 UINT SFXid;

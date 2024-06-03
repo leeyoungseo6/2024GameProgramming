@@ -10,11 +10,3 @@ protected:
 	POINT _pos;
 	char _symbol;
 };
-
-class Enemy : public Object
-{
-public:
-	Enemy(POINT pos);
-	virtual void Update() override;
-	void Render() override;
-};
