@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,15 +129,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AstarGrid.cpp" />
+    <ClCompile Include="AstarPathFinder.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mci.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="Single.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AstarGrid.h" />
+    <ClInclude Include="AstarPathFinder.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="define.h" />

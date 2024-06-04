@@ -6,17 +6,31 @@ void AstarGrid::CreateGrid()
 	{
 		for (int j = 0; j < MAP_WIDTH; j++)
 		{
-			_grid[i][j] = { i, j, 0, 0, true };
+			_grid[i][j] = new AstarNode(j, i, true);
 		}
 	}
 }
 
-vector<AstarNode>& AstarGrid::GetOpenList(PAstarNode node)
+PAstarNode AstarGrid::GetNode(POINT pos)
 {
-	vector<AstarNode> openList(4);
-	openList.push_back({ node->X + 1, node->Y, 0, 0, true });
-	openList.push_back({ node->X - 1, node->Y, 0, 0, true });
-	openList.push_back({ node->X, node->Y + 1, 0, 0, true });
-	openList.push_back({ node->X, node->Y - 1, 0, 0, true });
+	return _grid[pos.y][pos.x];
+}
+
+vector<AstarNode> AstarGrid::GetOpenList(const AstarNode& node)
+{
+	vector<AstarNode> openList;
+	for (int i = -1; i <= 1; i++)
+	{
+		for (int j = -1; j <= 1; j++)
+		{
+			int clampedX = std::clamp(node.X + i, 0, MAP_WIDTH);
+			int clampedY = std::clamp(node.Y + j, 0, MAP_HEIGHT);
+			if ((i + j == -1 || i + j == 1) && _grid[clampedY][clampedX]->IsWalkable)
+			{
+				openList.push_back(*_grid[clampedY][clampedX]);
+			}
+		}
+	}
+
 	return openList;
 }

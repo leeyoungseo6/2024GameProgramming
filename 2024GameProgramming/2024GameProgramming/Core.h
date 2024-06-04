@@ -1,5 +1,6 @@
 #pragma once
-#include "define.h"
+#include <Windows.h>
+#include "Enemy.h"
 class Core
 {
 private:
@@ -15,7 +16,7 @@ public:
 	static Core* GetInstance()
 	{
 		if (pInst == nullptr)
-			pInst = nullptr;
+			pInst = new Core;
 		return pInst;
 	}
 	static void DestroyInstance()
@@ -24,5 +25,6 @@ public:
 	}
 private:
 	static Core* pInst;
+	Enemy* enemy;
 };
 

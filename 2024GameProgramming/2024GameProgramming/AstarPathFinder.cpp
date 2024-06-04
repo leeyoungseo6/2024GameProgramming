@@ -1,0 +1,58 @@
+#include "AstarPathFinder.h"
+AstarPathFinder* AstarPathFinder::pInst = nullptr;
+
+bool AstarPathFinder::Init()
+{
+	Grid = AstarGrid();
+	Grid.CreateGrid();
+	return true;
+}
+
+stack<POINT> AstarPathFinder::GetPath(POINT startPos, POINT targetPos)
+{
+	AstarNode startNode = *Grid.GetNode(startPos);
+	AstarNode targetNode = *Grid.GetNode(targetPos);
+
+	vector<AstarNode> openList;
+	vector<AstarNode> closedList { openList };
+	AstarNode currentNode = startNode;
+
+	while (currentNode != targetNode)
+	{
+		for (auto neighbor : Grid.GetOpenList(currentNode))
+		{
+			if (neighbor.IsWalkable == false || std::find(closedList.begin(), closedList.end(), neighbor) != closedList.end()) continue;
+			neighbor.G = currentNode.G + currentNode.GetDistanceCost(neighbor);
+			neighbor.H = currentNode.GetDistanceCost(targetNode);
+			neighbor.ParentNode = Grid.GetNode({currentNode.X, currentNode.Y});
+			if (std::find(openList.begin(), openList.end(), neighbor) == openList.end())
+				openList.push_back(neighbor);
+		}
+
+		int idx = 0;
+		currentNode = openList[0];
+		for (int i = 0; i < openList.size(); i++)
+		{
+			AstarNode node = openList[i];
+			if (node.F < currentNode.F || (node.F == currentNode.F && node.H < currentNode.H))
+			{
+				currentNode = node;
+				idx = i;
+			}
+		}
+
+		openList.erase(openList.begin() + idx);
+		closedList.push_back(currentNode);
+	}
+
+	currentNode = targetNode;
+
+	stack<POINT> path;
+	while (currentNode != startNode)
+	{
+		path.push({currentNode.X, currentNode.Y});
+		currentNode = *currentNode.ParentNode;
+	}
+
+	return path;
+}
