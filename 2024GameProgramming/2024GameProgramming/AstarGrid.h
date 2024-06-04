@@ -44,7 +44,7 @@ class AstarGrid
 public:
 	void CreateGrid();
 	PAstarNode GetNode(POINT pos);
-	vector<AstarNode> GetOpenList(const AstarNode& node);
+	vector<PAstarNode> GetOpenList(const AstarNode& node);
 
 private:
 	PAstarNode _grid[MAP_HEIGHT][MAP_WIDTH];

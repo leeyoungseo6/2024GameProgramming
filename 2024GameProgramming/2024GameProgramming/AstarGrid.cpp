@@ -16,9 +16,9 @@ PAstarNode AstarGrid::GetNode(POINT pos)
 	return _grid[pos.y][pos.x];
 }
 
-vector<AstarNode> AstarGrid::GetOpenList(const AstarNode& node)
+vector<PAstarNode> AstarGrid::GetOpenList(const AstarNode& node)
 {
-	vector<AstarNode> openList;
+	vector<PAstarNode> openList;
 	for (int i = -1; i <= 1; i++)
 	{
 		for (int j = -1; j <= 1; j++)
@@ -27,7 +27,7 @@ vector<AstarNode> AstarGrid::GetOpenList(const AstarNode& node)
 			int clampedY = std::clamp(node.Y + j, 0, MAP_HEIGHT);
 			if ((i + j == -1 || i + j == 1) && _grid[clampedY][clampedX]->IsWalkable)
 			{
-				openList.push_back(*_grid[clampedY][clampedX]);
+				openList.push_back(_grid[clampedY][clampedX]);
 			}
 		}
 	}

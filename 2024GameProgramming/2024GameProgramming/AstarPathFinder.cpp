@@ -10,21 +10,21 @@ bool AstarPathFinder::Init()
 
 stack<POINT> AstarPathFinder::GetPath(POINT startPos, POINT targetPos)
 {
-	AstarNode startNode = *Grid.GetNode(startPos);
-	AstarNode targetNode = *Grid.GetNode(targetPos);
+	PAstarNode startNode = Grid.GetNode(startPos);
+	PAstarNode targetNode = Grid.GetNode(targetPos);
 
-	vector<AstarNode> openList;
-	vector<AstarNode> closedList { openList };
-	AstarNode currentNode = startNode;
+	vector<PAstarNode> openList;
+	vector<PAstarNode> closedList { openList };
+	PAstarNode currentNode = startNode;
 
 	while (currentNode != targetNode)
 	{
-		for (auto neighbor : Grid.GetOpenList(currentNode))
+		for (auto neighbor : Grid.GetOpenList(*currentNode))
 		{
-			if (neighbor.IsWalkable == false || std::find(closedList.begin(), closedList.end(), neighbor) != closedList.end()) continue;
-			neighbor.G = currentNode.G + currentNode.GetDistanceCost(neighbor);
-			neighbor.H = currentNode.GetDistanceCost(targetNode);
-			neighbor.ParentNode = Grid.GetNode({currentNode.X, currentNode.Y});
+			if (neighbor->IsWalkable == false || std::find(closedList.begin(), closedList.end(), neighbor) != closedList.end()) continue;
+			neighbor->G = currentNode->G + currentNode->GetDistanceCost(*neighbor);
+			neighbor->H = currentNode->GetDistanceCost(*targetNode);
+			neighbor->ParentNode = currentNode;
 			if (std::find(openList.begin(), openList.end(), neighbor) == openList.end())
 				openList.push_back(neighbor);
 		}
@@ -33,8 +33,8 @@ stack<POINT> AstarPathFinder::GetPath(POINT startPos, POINT targetPos)
 		currentNode = openList[0];
 		for (int i = 0; i < openList.size(); i++)
 		{
-			AstarNode node = openList[i];
-			if (node.F < currentNode.F || (node.F == currentNode.F && node.H < currentNode.H))
+			PAstarNode node = openList[i];
+			if (node->F < currentNode->F || (node->F == currentNode->F && node->H < currentNode->H))
 			{
 				currentNode = node;
 				idx = i;
@@ -50,8 +50,8 @@ stack<POINT> AstarPathFinder::GetPath(POINT startPos, POINT targetPos)
 	stack<POINT> path;
 	while (currentNode != startNode)
 	{
-		path.push({currentNode.X, currentNode.Y});
-		currentNode = *currentNode.ParentNode;
+		path.push({currentNode->X, currentNode->Y});
+		currentNode = currentNode->ParentNode;
 	}
 
 	return path;

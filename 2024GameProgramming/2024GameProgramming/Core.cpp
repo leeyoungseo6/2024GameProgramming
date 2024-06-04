@@ -9,7 +9,7 @@ Core::Core()
 bool Core::Init()
 {
 	AstarPathFinder::GetInstance()->Init();
-	POINT pos = { 0, 5 };
+	POINT pos = { 4, 5 };
 	enemy = new Enemy(pos);
 	return true;
 }
