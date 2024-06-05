@@ -1,6 +1,9 @@
 #pragma once
 #include <Windows.h>
+#include "console.h"
+#include "Player.h"
 #include "Enemy.h"
+
 class Core
 {
 private:
@@ -12,6 +15,7 @@ public:
 private:
 	void Update();
 	void Render();
+	void FrameSync(unsigned int frameRate);
 public:
 	static Core* GetInstance()
 	{
@@ -25,6 +29,7 @@ public:
 	}
 private:
 	static Core* pInst;
-	Enemy* enemy;
+	Player* _player;
+	Enemy* _enemy;
 };
 

@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <math.h>
 #include "define.h"
+#include "Object.h"
 
 typedef struct _tagastarnode
 {
@@ -43,7 +44,7 @@ class AstarGrid
 {
 public:
 	void CreateGrid();
-	PAstarNode GetNode(POINT pos);
+	PAstarNode GetNode(const POS& pos);
 	vector<PAstarNode> GetOpenList(const AstarNode& node);
 
 private:

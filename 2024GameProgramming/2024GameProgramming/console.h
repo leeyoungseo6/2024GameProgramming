@@ -15,7 +15,3 @@ enum class COLOR
 	VIOLET, YELLOW, LIGHT_GRAY, GRAY, LIGHT_BLUE,
 	LIGHT_GREEN, MINT, LIGHT_RED, LIGHT_VIOLET, LIGHT_YELLOW, WHITE, END
 };
-#include <iostream>
-using std::cout;
-using std::wcout;
-using std::endl;

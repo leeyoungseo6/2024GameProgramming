@@ -4,10 +4,10 @@
 class Enemy : public Object
 {
 public:
-	Enemy(POINT pos);
+	Enemy(POS pos);
 	void Update() override;
 	void Render() override;
 private:
-	POINT _targetPos;
+	POS _targetPos;
 	bool _targets;
 };

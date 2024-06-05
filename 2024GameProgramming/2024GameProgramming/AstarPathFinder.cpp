@@ -8,7 +8,7 @@ bool AstarPathFinder::Init()
 	return true;
 }
 
-stack<POINT> AstarPathFinder::GetPath(POINT startPos, POINT targetPos)
+stack<POS> AstarPathFinder::GetPath(const POS& startPos, const POS& targetPos)
 {
 	PAstarNode startNode = Grid.GetNode(startPos);
 	PAstarNode targetNode = Grid.GetNode(targetPos);
@@ -47,7 +47,7 @@ stack<POINT> AstarPathFinder::GetPath(POINT startPos, POINT targetPos)
 
 	currentNode = targetNode;
 
-	stack<POINT> path;
+	stack<POS> path;
 	while (currentNode != startNode)
 	{
 		path.push({currentNode->X, currentNode->Y});

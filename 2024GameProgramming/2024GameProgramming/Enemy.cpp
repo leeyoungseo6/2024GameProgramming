@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-Enemy::Enemy(POINT pos)
+Enemy::Enemy(POS pos)
 	: Object(pos, 'a')
 {
 	_targetPos = { -1, -1 };
@@ -11,7 +11,7 @@ void Enemy::Update()
 {
 	if (_targets == false)
 	{
-		stack<POINT> path = AstarPathFinder::GetInstance()->GetPath(_pos, {0, 0});
+		stack<POS> path = AstarPathFinder::GetInstance()->GetPath(_pos, {0, 0});
 		while (path.empty() == false)
 		{
 			_pos = path.top();

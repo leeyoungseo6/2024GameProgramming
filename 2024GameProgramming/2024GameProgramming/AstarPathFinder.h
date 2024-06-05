@@ -23,7 +23,7 @@ public:
 		SAFE_DELETE(pInst);
 	}
 
-	stack<POINT> GetPath(POINT startPos, POINT targetPos);
+	stack<POS> GetPath(const POS& startPos, const POS& targetPos);
 public:
 	AstarGrid Grid;
 };

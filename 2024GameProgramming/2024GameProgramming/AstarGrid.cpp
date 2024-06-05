@@ -11,7 +11,7 @@ void AstarGrid::CreateGrid()
 	}
 }
 
-PAstarNode AstarGrid::GetNode(POINT pos)
+PAstarNode AstarGrid::GetNode(const POS& pos)
 {
 	return _grid[pos.y][pos.x];
 }
