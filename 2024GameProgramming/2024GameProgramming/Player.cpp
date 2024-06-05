@@ -9,7 +9,7 @@ Player::Player(POS pos)
 void Player::Update()
 {
 
-	if (Raycast(_pos, _dir, ))
+	//if (Raycast(_pos, _dir, ))
 }
 
 void Player::Render()
@@ -36,5 +36,6 @@ bool Player::Raycast(const POS& origin, const POS& dir, PPOS hit, char target)
 			return true;
 	}
 
+	*hit = origin;
 	return false;
 }
