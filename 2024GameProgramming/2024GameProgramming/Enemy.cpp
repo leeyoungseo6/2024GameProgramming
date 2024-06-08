@@ -17,6 +17,7 @@ void Enemy::Update()
 		if (_targetPath.empty() == false)
 		{
 			_pos = _targetPath.top();
+			LayerMask::GetInstance()->Move(_pos, _targetPath.top(), Layer::Enemy);
 			cout << _pos.x << " " << _pos.y << endl;
 			_targetPath.pop();
 		}

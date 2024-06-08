@@ -22,6 +22,10 @@ typedef struct _tagpos
 	{
 		return x == b.x && y == b.y;
 	}
+	_tagpos&& operator-()
+	{
+		return { -x, -y };
+	}
 } POS, *PPOS;
 
 class Object

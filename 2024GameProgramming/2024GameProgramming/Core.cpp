@@ -9,7 +9,8 @@ Core::Core()
 bool Core::Init()
 {
 	AstarPathFinder::GetInstance()->Init();
-	_player = new Player({ 0, 0 });
+	LayerMask::GetInstance()->Init();
+	_player = new Player({ 2, 0 });
 	_enemy = new Enemy({ 4, 5 });
 	return true;
 }

@@ -1,6 +1,8 @@
 #pragma once
 #include "Object.h"
 #include "AstarPathFinder.h"
+#include "LayerMask.h"
+
 class Enemy : public Object
 {
 public:

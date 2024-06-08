@@ -134,6 +134,7 @@
     <ClCompile Include="console.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="LayerMask.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mci.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="LayerMask.h" />
     <ClInclude Include="mci.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
