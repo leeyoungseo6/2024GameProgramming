@@ -128,9 +128,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AstarGrid.cpp" />
-    <ClCompile Include="AstarNode.cpp" />
-    <ClCompile Include="AstarPathFinder.cpp" />
+    <ClCompile Include="AStarGrid.cpp" />
+    <ClCompile Include="AStarNode.cpp" />
+    <ClCompile Include="AStarPathFinder.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -141,9 +141,9 @@
     <ClCompile Include="Single.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AstarGrid.h" />
-    <ClInclude Include="AstarNode.h" />
-    <ClInclude Include="AstarPathFinder.h" />
+    <ClInclude Include="AStarGrid.h" />
+    <ClInclude Include="AStarNode.h" />
+    <ClInclude Include="AStarPathFinder.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="define.h" />
