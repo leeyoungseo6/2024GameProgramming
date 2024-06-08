@@ -25,6 +25,6 @@ public:
 
 	stack<POS> GetPath(const POS& startPos, const POS& targetPos);
 public:
-	AstarGrid Grid;
+	AStarGrid Grid;
 };
 

@@ -18,6 +18,10 @@ typedef struct _tagpos
 	{
 		return { x += b.x, y += b.y };
 	}
+	bool operator==(const _tagpos& b)
+	{
+		return x == b.x && y == b.y;
+	}
 } POS, *PPOS;
 
 class Object

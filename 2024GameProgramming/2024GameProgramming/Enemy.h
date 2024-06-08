@@ -7,7 +7,10 @@ public:
 	Enemy(POS pos);
 	void Update() override;
 	void Render() override;
+	void SetDestination(POS targetPos);
 private:
+	stack<POS> _targetPath;
 	POS _targetPos;
-	bool _targets;
+
+	clock_t _lastMovedTime;
 };

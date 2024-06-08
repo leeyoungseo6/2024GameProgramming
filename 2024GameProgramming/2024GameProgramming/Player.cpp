@@ -3,12 +3,13 @@
 Player::Player(POS pos)
 	: Object(pos, 'a')
 {
-
+	srand((unsigned int)time(NULL));
 }
 
 void Player::Update()
 {
-
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+		_pos = { rand() % 20, rand() % 20};
 	//if (Raycast(_pos, _dir, ))
 }
 

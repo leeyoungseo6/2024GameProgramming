@@ -4,26 +4,33 @@ Enemy::Enemy(POS pos)
 	: Object(pos, 'a')
 {
 	_targetPos = { -1, -1 };
-	_targets = false;
 }
 
 void Enemy::Update()
 {
-	if (_targets == false)
+	//cout << "Ãâ·Â" << endl;
+	clock_t currentTime = clock();
+	if (currentTime - _lastMovedTime >= 1000)
 	{
-		stack<POS> path = AstarPathFinder::GetInstance()->GetPath(_pos, {0, 0});
-		while (path.empty() == false)
+		_lastMovedTime = currentTime;
+		
+		if (_targetPath.empty() == false)
 		{
-			_pos = path.top();
-			cout << path.top().x << " " << path.top().y << endl;
-			path.pop();
+			_pos = _targetPath.top();
+			cout << _pos.x << " " << _pos.y << endl;
+			_targetPath.pop();
 		}
-
-		_targets = true;
 	}
 }
 
 void Enemy::Render()
 {
 
+}
+
+void Enemy::SetDestination(POS targetPos)
+{
+	if (_targetPos == targetPos) return;
+	_targetPos = targetPos;
+	_targetPath = AstarPathFinder::GetInstance()->GetPath(_pos, targetPos);
 }
