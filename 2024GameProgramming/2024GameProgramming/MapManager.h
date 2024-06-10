@@ -29,4 +29,8 @@ public:
 
 	bool CheckLoad(POS player);
 	void LoadMap(std::string name);
+	void Renderer();
 };
+
+using std::cout;
+using std::endl;

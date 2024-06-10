@@ -1,8 +1,8 @@
 #include "MapManager.h"
 
-void MapManager::CheckLoad(POS player) // 현재 내 위치가 로드인지 아닌지 확인하는 함수
+bool MapManager::CheckLoad(POS pos) // 현재 내 위치가 로드인지 아닌지 확인하는 함수
 {
-
+	return _arrMap[pos.y][pos.x] == (char)OBJ_TYPE::ROAD ? true : false;
 }
 
 void MapManager::LoadMap(std::string name)
@@ -14,8 +14,26 @@ void MapManager::LoadMap(std::string name)
 			readMap.clear();
 			readMap.getline(_arrMap[i], MAP_WIDTH);
 			if (readMap.fail()) {
-				std::cout << "맵 로딩에 문제가 생겼어용.." << std::endl;
+				cout << "맵 로딩에 문제가 생겼어용.." << endl;
 			}
 		}
 	}
+}
+
+void MapManager::Renderer()
+{
+	//for (int i = 0; i < MAP_HEIGHT; ++i) {
+	//	for (int j = 0; j < MAP_WIDTH; ++j) {
+	//		if (_pPlayer->tPos.x == j && _pPlayer->tPos.y == i) { // 플레이어 찍어주기
+	//			cout << "⊙";
+	//		}
+	//		else if (_arrMap[i][j] == (char)OBJ_TYPE::WALL) {
+	//			cout << "■";
+	//		}
+	//		else if (_arrMap[i][j] == (char)OBJ_TYPE::ROAD) {
+	//			cout << "  ";
+	//		}
+	//	}
+	//	cout << endl;
+	//}
 }
