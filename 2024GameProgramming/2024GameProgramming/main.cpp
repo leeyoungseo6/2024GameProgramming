@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Core.h"
-#include "AstarGrid.h"
+#include "AStarGrid.h"
 
 int main()
 {

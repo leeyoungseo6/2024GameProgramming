@@ -1,5 +1,5 @@
 #include <iostream>
-#include "AstarNode.h"
+#include "AStarNode.h"
 
 AStarNode::AStarNode(int x, int y, bool isWalkable)
 {
