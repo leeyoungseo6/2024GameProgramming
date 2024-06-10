@@ -1,7 +1,7 @@
 #include <iostream>
 #include "AstarNode.h"
 
-_tagastarnode::_tagastarnode(int x, int y, bool isWalkable)
+AStarNode::AStarNode(int x, int y, bool isWalkable)
 {
 	X = x;
 	Y = y;
@@ -10,7 +10,7 @@ _tagastarnode::_tagastarnode(int x, int y, bool isWalkable)
 	IsWalkable = isWalkable;
 }
 
-int _tagastarnode::GetDistanceCost(const _tagastarnode& node)
+int AStarNode::GetDistanceCost(const AStarNode& node)
 {
 	int disX = abs(X - node.X);
 	int disY = abs(Y - node.Y);
@@ -18,7 +18,7 @@ int _tagastarnode::GetDistanceCost(const _tagastarnode& node)
 	return disX + disY;
 }
 
-void _tagastarnode::operator=(const _tagastarnode& b)
+void AStarNode::operator=(const AStarNode& b)
 {
 	X = b.X;
 	Y = b.Y;
@@ -28,12 +28,12 @@ void _tagastarnode::operator=(const _tagastarnode& b)
 	ParentNode = b.ParentNode;
 }
 
-bool _tagastarnode::operator==(const _tagastarnode& b)
+bool AStarNode::operator==(const AStarNode& b)
 {
 	return X == b.X && Y == b.Y;
 }
 
-bool _tagastarnode::operator!=(const _tagastarnode& b)
+bool AStarNode::operator!=(const AStarNode& b)
 {
 	return !(*this == b);
 }

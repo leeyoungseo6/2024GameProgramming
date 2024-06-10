@@ -10,12 +10,12 @@ bool AstarPathFinder::Init()
 
 stack<POS> AstarPathFinder::GetPath(const POS& startPos, const POS& targetPos)
 {
-	PAStarNode startNode = Grid.GetNode(startPos);
-	PAStarNode targetNode = Grid.GetNode(targetPos);
+	AStarNode* startNode = Grid.GetNode(startPos);
+	AStarNode* targetNode = Grid.GetNode(targetPos);
 
-	vector<PAStarNode> openList;
-	vector<PAStarNode> closedList{ openList };
-	PAStarNode currentNode = startNode;
+	vector<AStarNode*> openList;
+	vector<AStarNode*> closedList{ openList };
+	AStarNode* currentNode = startNode;
 
 	while (currentNode != targetNode)
 	{
@@ -33,7 +33,7 @@ stack<POS> AstarPathFinder::GetPath(const POS& startPos, const POS& targetPos)
 		currentNode = openList[0];
 		for (int i = 0; i < openList.size(); i++)
 		{
-			PAStarNode node = openList[i];
+			AStarNode* node = openList[i];
 			if (node->F < currentNode->F || (node->F == currentNode->F && node->H < currentNode->H))
 			{
 				currentNode = node;
