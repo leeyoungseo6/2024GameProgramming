@@ -1,10 +1,11 @@
 #pragma once
 #include <math.h>
-typedef struct _tagastarnode
+#include "Object.h"
+class AStarNode
 {
 public:
-	_tagastarnode();
-	_tagastarnode(int x, int y, bool isWalkable);
+	AStarNode();
+	AStarNode(int x, int y, bool isWalkable);
 public:
 	int X, Y;
 	int G, H;
@@ -12,11 +13,12 @@ public:
 	int f() { return G + H; }
 
 	bool IsWalkable;
-	_tagastarnode* ParentNode;
+	AStarNode* ParentNode;
 
 public:
-	int GetDistanceCost(const _tagastarnode& neighbor);
+	int GetDistanceCost(const AStarNode& neighbor);
 
-	bool operator ==(const _tagastarnode& b);
-	bool operator !=(const _tagastarnode& b);
-} AStarNode, *PAStarNode;
+	void operator =(const AStarNode& b);
+	bool operator ==(const AStarNode& b);
+	bool operator !=(const AStarNode& b);
+};
