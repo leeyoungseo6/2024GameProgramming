@@ -1,4 +1,5 @@
 #include "AstarGrid.h"
+#include "MapManager.h"
 
 void AStarGrid::CreateGrid()
 {
