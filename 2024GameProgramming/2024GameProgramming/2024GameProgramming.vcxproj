@@ -128,21 +128,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AStarGrid.cpp" />
-    <ClCompile Include="AStarNode.cpp" />
-    <ClCompile Include="AStarPathFinder.cpp" />
-    <ClCompile Include="console.cpp" />
-    <ClCompile Include="Core.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="LayerMask.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="MapManager.cpp" />
-    <ClCompile Include="mci.cpp" />
-    <ClCompile Include="Object.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Single.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="AStarGrid.h" />
     <ClInclude Include="AStarNode.h" />
     <ClInclude Include="AStarPathFinder.h" />
@@ -151,15 +136,22 @@
     <ClInclude Include="define.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="LayerMask.h" />
-    <ClInclude Include="MapManager.h" />
     <ClInclude Include="mci.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="Single.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="2024GameProgramming.rc" />
+    <ClCompile Include="AStarGrid.cpp" />
+    <ClCompile Include="AStarNode.cpp" />
+    <ClCompile Include="AStarPathFinder.cpp" />
+    <ClCompile Include="console.cpp" />
+    <ClCompile Include="Core.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="LayerMask.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mci.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

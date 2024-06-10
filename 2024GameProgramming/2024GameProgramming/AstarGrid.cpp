@@ -1,5 +1,4 @@
-#include "AstarGrid.h"
-#include "MapManager.h"
+#include "AStarGrid.h"
 
 void AStarGrid::CreateGrid()
 {
@@ -12,14 +11,14 @@ void AStarGrid::CreateGrid()
 	}
 }
 
-PAStarNode AStarGrid::GetNode(const POS& pos)
+AStarNode* AStarGrid::GetNode(const POS& pos)
 {
 	return _grid[pos.y][pos.x];
 }
 
-vector<PAStarNode> AStarGrid::GetOpenList(const AStarNode& node)
+vector<AStarNode*> AStarGrid::GetOpenList(const AStarNode& node)
 {
-	vector<PAStarNode> openList;
+	vector<AStarNode*> openList;
 	for (int i = -1; i <= 1; i++)
 	{
 		for (int j = -1; j <= 1; j++)

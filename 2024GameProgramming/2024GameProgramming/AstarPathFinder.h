@@ -1,7 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include "define.h"
-#include "AstarGrid.h"
+#include "AStarGrid.h"
 class AstarPathFinder
 {
 private:

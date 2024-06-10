@@ -1,4 +1,4 @@
-#include "AstarPathFinder.h"
+#include "AStarPathFinder.h"
 AstarPathFinder* AstarPathFinder::pInst = nullptr;
 
 bool AstarPathFinder::Init()
