@@ -1,5 +1,6 @@
 #pragma once
 #include <math.h>
+#include "Object.h"
 typedef struct _tagastarnode
 {
 public:
@@ -17,6 +18,7 @@ public:
 public:
 	int GetDistanceCost(const _tagastarnode& neighbor);
 
+	void operator =(const _tagastarnode& b);
 	bool operator ==(const _tagastarnode& b);
 	bool operator !=(const _tagastarnode& b);
 } AStarNode, *PAStarNode;

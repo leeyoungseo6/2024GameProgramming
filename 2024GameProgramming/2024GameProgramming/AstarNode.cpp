@@ -1,27 +1,39 @@
+#include <iostream>
 #include "AstarNode.h"
 
-AStarNode::_tagastarnode(int x, int y, bool isWalkable)
+_tagastarnode::_tagastarnode(int x, int y, bool isWalkable)
 {
 	X = x;
 	Y = y;
+	G = 0;
+	H = 0;
 	IsWalkable = isWalkable;
 }
 
-int AStarNode::GetDistanceCost(const AStarNode& node)
+int _tagastarnode::GetDistanceCost(const _tagastarnode& node)
 {
 	int disX = abs(X - node.X);
 	int disY = abs(Y - node.Y);
 
-	if (disX > disY) return 14 * disY + 10 * (disX - disY);
-	return 14 * disX + 10 * (disY - disX);
+	return disX + disY;
 }
 
-bool AStarNode::operator==(const AStarNode& b)
+void _tagastarnode::operator=(const _tagastarnode& b)
+{
+	X = b.X;
+	Y = b.Y;
+	G = b.G;
+	H = b.H;
+	IsWalkable = b.IsWalkable;
+	ParentNode = b.ParentNode;
+}
+
+bool _tagastarnode::operator==(const _tagastarnode& b)
 {
 	return X == b.X && Y == b.Y;
 }
 
-bool AStarNode::operator!=(const AStarNode& b)
+bool _tagastarnode::operator!=(const _tagastarnode& b)
 {
 	return !(*this == b);
 }

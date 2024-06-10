@@ -4,7 +4,7 @@ void AStarGrid::CreateGrid()
 {
 	for (int i = 0; i < MAP_HEIGHT; i++)
 	{
-		for (int j = 0; j < MAP_WIDTH; j++)
+		for (int j = 0; j < MAP_WIDTH - 1; j++)
 		{
 			_grid[i][j] = new AStarNode(j, i, true);
 		}

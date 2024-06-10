@@ -11,7 +11,7 @@ bool Core::Init()
 	AstarPathFinder::GetInstance()->Init();
 	LayerMask::GetInstance()->Init();
 	_player = new Player({ 2, 0 });
-	_enemy = new Enemy({ 4, 5 });
+	_enemy = new Enemy({ 10, 10 });
 	return true;
 }
 

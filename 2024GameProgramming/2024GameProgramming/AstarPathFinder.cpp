@@ -14,7 +14,7 @@ stack<POS> AstarPathFinder::GetPath(const POS& startPos, const POS& targetPos)
 	PAStarNode targetNode = Grid.GetNode(targetPos);
 
 	vector<PAStarNode> openList;
-	vector<PAStarNode> closedList { openList };
+	vector<PAStarNode> closedList{ openList };
 	PAStarNode currentNode = startNode;
 
 	while (currentNode != targetNode)
@@ -50,7 +50,7 @@ stack<POS> AstarPathFinder::GetPath(const POS& startPos, const POS& targetPos)
 	stack<POS> path;
 	while (currentNode != startNode)
 	{
-		path.push({currentNode->X, currentNode->Y});
+		path.push({ currentNode->X, currentNode->Y });
 		currentNode = currentNode->ParentNode;
 	}
 
