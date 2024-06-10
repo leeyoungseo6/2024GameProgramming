@@ -1,6 +1,6 @@
 #pragma once
 #include "Object.h"
-#include "define.h"
+#include "MapManager.h"
 
 enum class Layer
 {

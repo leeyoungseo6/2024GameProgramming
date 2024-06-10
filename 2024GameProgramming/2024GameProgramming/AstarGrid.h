@@ -5,6 +5,7 @@
 #include "define.h"
 #include "Object.h"
 #include "AStarNode.h"
+#include "MapManager.h"
 
 class AStarGrid
 {
