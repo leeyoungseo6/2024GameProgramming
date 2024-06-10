@@ -10,6 +10,3 @@ using std::vector;
 using std::stack;
 #include <Windows.h>
 #define SAFE_DELETE(p) if (pInst != nullptr) { delete pInst; pInst = nullptr; }
-
-#define MAP_WIDTH 21
-#define MAP_HEIGHT 20

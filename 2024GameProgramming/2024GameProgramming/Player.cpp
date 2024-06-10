@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "MapManager.h"
 
 Player::Player(POS pos)
 	: Object(pos, 'a')
