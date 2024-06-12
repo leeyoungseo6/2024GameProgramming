@@ -31,43 +31,46 @@
     <Filter Include="헤더 파일\Object">
       <UniqueIdentifier>{d89cfb1b-a1a0-46c5-a781-05f0c0a828fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Map">
+      <UniqueIdentifier>{b0d5a578-f97f-4f10-b1df-a5ac4c4fd9dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h">
       <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\LayerMask.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="AStar\AStarGrid.h">
-      <Filter>헤더 파일\AStar</Filter>
-    </ClInclude>
-    <ClInclude Include="AStar\AStarNode.h">
-      <Filter>헤더 파일\AStar</Filter>
-    </ClInclude>
-    <ClInclude Include="AStar\AStarPathFinder.h">
-      <Filter>헤더 파일\AStar</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\Enemy.h">
-      <Filter>헤더 파일\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Core.h">
-      <Filter>헤더 파일\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\mci.h">
-      <Filter>헤더 파일\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\console.h">
-      <Filter>헤더 파일\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\Object.h">
-      <Filter>헤더 파일\Object</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>헤더 파일\Object</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>헤더 파일\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="AStarGrid.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="AStarNode.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="AStarPathFinder.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="console.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="LayerMask.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="mci.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MapManager.h">
+      <Filter>소스 파일\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +106,9 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="MapManager.cpp">
+      <Filter>소스 파일\Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
