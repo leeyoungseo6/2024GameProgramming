@@ -14,7 +14,7 @@ void MapManager::LoadMap(std::string name)
 			readMap.clear();
 			readMap.getline(_arrMap[i], MAP_WIDTH);
 			if (readMap.fail()) {
-				cout << "¸Ê ·Îµù¿¡ ¹®Á¦°¡ »ı°å¾î¿ë.." << endl;
+				cout << "¸Ê ·Îµù¿¡ ¹®Á¦°¡ »ı°å¾î¿ë..";
 			}
 		}
 	}
