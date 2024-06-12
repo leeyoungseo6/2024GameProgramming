@@ -35,7 +35,8 @@ void Core::Update()
 
 void Core::Render()
 {
-
+	_player->Render();
+	_enemy->Render();
 }
 
 void Core::FrameSync(unsigned int frameRate)

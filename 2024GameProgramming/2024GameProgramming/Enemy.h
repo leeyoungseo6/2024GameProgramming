@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "AstarPathFinder.h"
 #include "LayerMask.h"
+#include "console.h"
 
 class Enemy : public Object
 {

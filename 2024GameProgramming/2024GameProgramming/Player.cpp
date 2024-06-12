@@ -1,29 +1,36 @@
 #include "Player.h"
-#include "MapManager.h"
+
 
 Player::Player(POS pos)
 	: Object(pos, 'a')
 {
-	_dir = { 0, 1 };
+	_dir = { 0, 0 };
 }
 
 void Player::Update()
 {
-	Move();
+	if (GetAsyncKeyState('W') & 0x8000)
+		Move({ 0, -1 });
+	else if (GetAsyncKeyState('A') & 0x8000)
+		Move({ -1, 0 });
+	else if (GetAsyncKeyState('S') & 0x8000)
+		Move({ 0, 1 });
+	else if (GetAsyncKeyState('D') & 0x8000)
+		Move({ 1, 0 });
 }
 
 void Player::Render()
 {
-
+	Gotoxy(_pos.x * 2, _pos.y);
+	cout << "¡Ý";
 }
 
-void Player::Move()
+void Player::Move(const POS dir)
 {
 	PPOS hit = new POS;
-	if (Raycast(_pos, _dir, hit, 1 << (int)Layer::Enemy | 1 << (int)Layer::Wall))
+	if (Raycast(_pos, dir, hit, 1 << (int)Layer::Enemy | 1 << (int)Layer::Wall))
 	{
-		_pos = *hit;
-		cout << "¼º°ø";
+		_pos = *hit - dir;
 	}
 	delete hit;
 }

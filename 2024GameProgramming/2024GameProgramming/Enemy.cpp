@@ -18,7 +18,6 @@ void Enemy::Update()
 		{
 			_pos = _targetPath.top();
 			LayerMask::GetInstance()->Move(_pos, _targetPath.top(), Layer::Enemy);
-			cout << _pos.x << " " << _pos.y << endl;
 			_targetPath.pop();
 		}
 	}
@@ -26,7 +25,8 @@ void Enemy::Update()
 
 void Enemy::Render()
 {
-
+	Gotoxy(_pos.x * 2, _pos.y);
+	cout << "¡â";
 }
 
 void Enemy::SetDestination(POS targetPos)

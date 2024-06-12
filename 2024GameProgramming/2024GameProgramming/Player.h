@@ -2,6 +2,8 @@
 #include "Object.h"
 #include "define.h"
 #include "LayerMask.h"
+#include "MapManager.h"
+#include "console.h"
 
 typedef struct _tagraycasthit
 {
@@ -18,7 +20,7 @@ public:
 	void Render() override;
 
 	const POS& GetPos() { return _pos; };
-	void Move();
+	void Move(const POS dir);
 	bool Raycast(const POS& origin, const POS& dir, PPOS hit, int layer);
 private:
 	POS _dir;
