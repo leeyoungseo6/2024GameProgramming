@@ -10,6 +10,7 @@ bool Core::Init()
 {
 	AstarPathFinder::GetInstance()->Init();
 	LayerMask::GetInstance()->Init();
+	MapManager::GetInstance()->Init();
 	_player = new Player({ 2, 0 });
 	_enemy = new Enemy({ 10, 10 });
 	return true;
@@ -35,7 +36,7 @@ void Core::Update()
 
 void Core::Render()
 {
-
+	MapManager::GetInstance()->Renderer();
 }
 
 void Core::FrameSync(unsigned int frameRate)

@@ -8,12 +8,12 @@ const int MAP_WIDTH = 16;
 const int MAP_HEIGHT = 15;
 
 enum class OBJ_TYPE {
-	WALL, ROAD, PLUSTIMEITEM, REDUCEDSPEEDITEM, ANYATTACKITEM
+	WALL='0', ROAD, PLUSTIMEITEM, REDUCEDSPEEDITEM, ANYATTACKITEM
 };
 
 class MapManager {
 private:
-	MapManager();
+	MapManager() = default;
 public:
 	static MapManager* GetInstance() {
 		if (Instance == nullptr) {
@@ -27,6 +27,7 @@ private:
 public:
 	char _arrMap[MAP_WIDTH][MAP_HEIGHT] = {};
 
+	void Init();
 	bool CheckLoad(POS player);
 	void LoadMap(std::string name);
 	void Renderer();
