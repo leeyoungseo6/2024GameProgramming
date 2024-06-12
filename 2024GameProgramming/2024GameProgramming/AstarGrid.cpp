@@ -25,7 +25,8 @@ vector<AStarNode*> AStarGrid::GetOpenList(const AStarNode& node)
 		{
 			int clampedX = std::clamp(node.X + i, 0, MAP_WIDTH - 1);
 			int clampedY = std::clamp(node.Y + j, 0, MAP_HEIGHT - 1);
-			if ((i + j == -1 || i + j == 1) && _grid[clampedY][clampedX]->IsWalkable)
+			if ((i + j == -1 || i + j == 1) && _grid[clampedY][clampedX]->IsWalkable
+				&& MapManager::GetInstance()->CheckRoad({ clampedX, clampedY }))
 			{
 				openList.push_back(_grid[clampedY][clampedX]);
 			}

@@ -1,8 +1,7 @@
 #include "MapManager.h"
-#include"console.h"
 
 MapManager* MapManager::Instance = nullptr;
-bool MapManager::CheckLoad(POS pos) // 현재 내 위치가 로드인지 아닌지 확인하는 함수
+bool MapManager::CheckRoad(POS pos) // 현재 내 위치가 로드인지 아닌지 확인하는 함수
 {
 	return _arrMap[pos.y][pos.x] == (char)OBJ_TYPE::ROAD ? true : false;
 }
@@ -37,16 +36,14 @@ void MapManager::LoadMap(std::string name)
 	}
 }
 
-void MapManager::Renderer()
+void MapManager::Render()
 {
-	Gotoxy(0, 0);
 	for (int i = 0; i < MAP_HEIGHT; ++i) {
 		for (int j = 0; j < MAP_WIDTH; ++j) {
 			if (_arrMap[i][j] == (char)OBJ_TYPE::WALL) {
+				Gotoxy(i * 2, j);
 				cout << "■";
-			}
-			else if (_arrMap[i][j] == (char)OBJ_TYPE::ROAD) {
-				cout << "  ";
+				LayerMask::GetInstance()->AddMask({ j, i }, Layer::Wall);
 			}
 		}
 		cout << endl;

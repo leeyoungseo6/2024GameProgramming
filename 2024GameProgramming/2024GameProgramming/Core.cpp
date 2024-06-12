@@ -1,4 +1,5 @@
 #include "Core.h"
+#include "console.h"
 Core* Core::pInst = nullptr;
 
 Core::Core()
@@ -8,10 +9,12 @@ Core::Core()
 
 bool Core::Init()
 {
+	CursorVisible(false, 1);
 	AstarPathFinder::GetInstance()->Init();
+	MapManager::GetInstance()->Init();
 	LayerMask::GetInstance()->Init();
-	_player = new Player({ 2, 0 });
-	_enemy = new Enemy({ 10, 10 });
+	_player = new Player({ 2, 1 });
+	_enemy = new Enemy({ 2, 10 });
 	return true;
 }
 
@@ -35,6 +38,7 @@ void Core::Update()
 
 void Core::Render()
 {
+	MapManager::GetInstance()->Render();
 	_player->Render();
 	_enemy->Render();
 }

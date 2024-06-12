@@ -30,7 +30,7 @@ stack<POS> AstarPathFinder::GetPath(const POS& startPos, const POS& targetPos)
 		}
 
 		int idx = 0;
-		currentNode = openList[0];
+		currentNode = openList.front();
 		for (int i = 0; i < openList.size(); i++)
 		{
 			AStarNode* node = openList[i];
