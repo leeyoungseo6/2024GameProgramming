@@ -23,6 +23,9 @@ void MapManager::Init()
 
 void MapManager::LoadMap(std::string name)
 {
+	LayerMask::GetInstance()->RemoveMask(Layer::Wall);
+	SortingLayer::GetInstance()->RemoveLayer(SortingLayerID::BG);
+
 	std::fstream readMap(name);
 	if (readMap.is_open()) {
 		for (int i = 0; i < MAP_HEIGHT; ++i) {
@@ -40,10 +43,16 @@ void MapManager::Render()
 {
 	for (int i = 0; i < MAP_HEIGHT; ++i) {
 		for (int j = 0; j < MAP_WIDTH; ++j) {
+			if (SortingLayer::GetInstance()->Mask({ j, i }) > 0)
+				continue;
+
+			Gotoxy(j * 2, i);
 			if (_arrMap[i][j] == (char)OBJ_TYPE::WALL) {
-				Gotoxy(i * 2, j);
 				cout << "бс";
 				LayerMask::GetInstance()->AddMask({ j, i }, Layer::Wall);
+			}
+			else if (_arrMap[i][j] == (char)OBJ_TYPE::ROAD) {
+				cout << "  ";
 			}
 		}
 		cout << endl;

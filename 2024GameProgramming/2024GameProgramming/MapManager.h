@@ -1,10 +1,12 @@
 #pragma once
 #include <string>
-#include<fstream>
-#include<iostream>
-#include "Object.h"
-#include"console.h"
+#include <fstream>
+#include <iostream>
 #include "LayerMask.h"
+#include "SortingLayer.h"
+#include "define.h"
+#include "Pos.h"
+#include "console.h"
 
 enum class OBJ_TYPE {
 	WALL='0', ROAD, PLUSTIMEITEM, REDUCEDSPEEDITEM, ANYATTACKITEM
@@ -31,6 +33,3 @@ public:
 	void LoadMap(std::string name);
 	void Render();
 };
-
-using std::cout;
-using std::endl;

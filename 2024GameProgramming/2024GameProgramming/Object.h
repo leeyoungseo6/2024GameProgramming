@@ -1,40 +1,20 @@
 #pragma once
 #include <Windows.h>
-
-typedef struct _tagpos
-{
-	int x;
-	int y;
-
-	_tagpos&& operator+(const _tagpos& b)
-	{
-		return { x + b.x, y + b.y };
-	}
-	_tagpos&& operator-(const _tagpos& b)
-	{
-		return { x - b.x, y - b.y };
-	}
-	_tagpos&& operator+=(const _tagpos& b)
-	{
-		return { x += b.x, y += b.y };
-	}
-	bool operator==(const _tagpos& b)
-	{
-		return x == b.x && y == b.y;
-	}
-	_tagpos&& operator-()
-	{
-		return { -x, -y };
-	}
-} POS, *PPOS;
+#include "Pos.h"
+#include "console.h"
+#include "LayerMask.h"
+#include "SortingLayer.h"
 
 class Object
 {
 public:
-	Object(POS pos, char symbol);
+	Object(POS pos, char symbol, Layer layer, SortingLayerID sortingLayer);
 	virtual void Update() abstract;
 	virtual void Render() {};
+	const POS& GetPos() { return _pos; };
 protected:
 	POS _pos;
 	char _symbol;
+	Layer _layer;
+	SortingLayerID _sortingLayer;
 };

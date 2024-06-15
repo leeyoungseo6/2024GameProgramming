@@ -1,5 +1,5 @@
 #include "Core.h"
-#include "console.h"
+
 Core* Core::pInst = nullptr;
 
 Core::Core()
@@ -13,8 +13,8 @@ bool Core::Init()
 	AstarPathFinder::GetInstance()->Init();
 	MapManager::GetInstance()->Init();
 	LayerMask::GetInstance()->Init();
-	_player = new Player({ 2, 1 });
-	_enemy = new Enemy({ 2, 10 });
+	_player = new Player({ 1, 1 });
+	_enemyVec.push_back(new Enemy({ 1, 10 }));
 	return true;
 }
 
@@ -24,6 +24,7 @@ void Core::Run()
 	while (true)
 	{
 		Update();
+		Gotoxy(0, 0);
 		Render();
 		FrameSync(60);
 	}
@@ -32,15 +33,46 @@ void Core::Run()
 void Core::Update()
 {
 	_player->Update();
-	_enemy->SetDestination(_player->GetPos());
-	_enemy->Update();
+	POS playerPos = _player->GetPos();
+	POS playerDir = _player->GetDirection();
+	for (auto iter = _enemyVec.begin(); iter < _enemyVec.end(); iter++)
+	{
+		POS enemyPos = (*iter)->GetPos();
+		if (playerPos + playerDir == enemyPos)
+		{
+			if (-playerDir == (*iter)->GetDirection())
+			{
+				// ÇÃ·¹ÀÌ¾î »ç¸Á
+				Gotoxy(50, 25);
+				cout << "»ç¸Á";
+			}
+			else
+			{
+				// ¿¡³Ê¹Ì »ç¸Á
+				(*iter)->Die();
+				iter = _enemyVec.erase(iter);
+			}
+		}
+
+		if (iter == _enemyVec.end()) return;
+		(*iter)->SetDestination(playerPos);
+		(*iter)->Update();
+
+		if (playerPos == enemyPos)
+		{
+			// ÇÃ·¹ÀÌ¾î »ç¸Á
+			Gotoxy(50, 25);
+			cout << "»ç¸Á";
+		}
+	}
 }
 
 void Core::Render()
 {
 	MapManager::GetInstance()->Render();
 	_player->Render();
-	_enemy->Render();
+	for (Enemy* enemy : _enemyVec)
+		enemy->Render();
 }
 
 void Core::FrameSync(unsigned int frameRate)

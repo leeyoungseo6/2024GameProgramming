@@ -1,7 +1,6 @@
 #pragma once
-#include "Object.h"
 #include "define.h"
-#include "MapManager.h"
+#include "Pos.h"
 
 enum class Layer
 {
@@ -11,8 +10,8 @@ enum class Layer
 class LayerMask
 {
 private:
-	LayerMask() {};
-	~LayerMask();
+	LayerMask() = default;
+	~LayerMask() {};
 public:
 	bool Init();
 public:
@@ -30,8 +29,10 @@ private:
 	static LayerMask* pInst;
 public:
 	void AddMask(POS pos, Layer layer);
+	void RemoveMask(POS pos, Layer layer);
+	void RemoveMask(Layer layer);
 	void Move(POS oldPos, POS newPos, Layer layer);
 	int Mask(POS pos);
 private:
-	bool _mask[(int)Layer::Count][MAP_HEIGHT][MAP_WIDTH];
+	bool _mask[(int)Layer::Count][MAP_HEIGHT][MAP_WIDTH] = { false };
 };
