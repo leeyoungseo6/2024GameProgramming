@@ -32,6 +32,7 @@ void Enemy::Update()
 void Enemy::Render()
 {
 	Gotoxy(_pos.x * 2, _pos.y);
+	SetColor((int)COLOR::LIGHT_RED);
 	if (_moveDir == POS::up)
 		cout << "¡â";
 	else if (_moveDir == POS::left)
@@ -40,6 +41,7 @@ void Enemy::Render()
 		cout << "¢¹";
 	else if (_moveDir == POS::down)
 		cout << "¡ä";
+	SetColor();
 }
 
 void Enemy::Die()

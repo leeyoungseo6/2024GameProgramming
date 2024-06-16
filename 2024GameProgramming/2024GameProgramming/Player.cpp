@@ -10,11 +10,7 @@ Player::Player(POS pos)
 void Player::Update()
 {
 	if (_isDead) return;
-	if (_dir != POS::zero)
-	{
-		_dir = POS::zero;
-		return;
-	}
+	POS dir = POS::zero;
 
 	if (_kbhit())
 	{
@@ -23,38 +19,28 @@ void Player::Update()
 		{
 		case 'w':
 		case 'W':
-			_dir = POS::up;
+			dir = POS::up;
 			break;
 		case 'a':
 		case 'A':
-			_dir = POS::left;
+			dir = POS::left;
 			break;
 		case 's':
 		case 'S':
-			_dir = POS::down;
+			dir = POS::down;
 			break;
 		case 'd':
 		case 'D':
-			_dir = POS::right;
+			dir = POS::right;
 			break;
 		}
 	}
 
-	Move(_dir);
-}
-
-void Player::Render()
-{
-	if (_isDead) return;
-	Gotoxy(_pos.x * 2, _pos.y);
-	cout << "¡Ý";
-}
-
-void Player::Die()
-{
-	_isDead = true;
-	LayerMask::GetInstance()->RemoveMask(_pos, _layer);
-	SortingLayer::GetInstance()->RemoveLayer(_pos, _sortingLayer);
+	if (dir != POS::zero)
+	{
+		_dir = dir;
+		Move(dir);
+	}
 }
 
 void Player::Move(const POS dir)
@@ -68,6 +54,22 @@ void Player::Move(const POS dir)
 		_pos = nextPos;
 	}
 	delete hit;
+}
+
+void Player::Render()
+{
+	if (_isDead) return;
+	Gotoxy(_pos.x * 2, _pos.y);
+	SetColor((int)COLOR::LIGHT_YELLOW);
+	cout << "¡Ý";
+	SetColor();
+}
+
+void Player::Die()
+{
+	_isDead = true;
+	LayerMask::GetInstance()->RemoveMask(_pos, _layer);
+	SortingLayer::GetInstance()->RemoveLayer(_pos, _sortingLayer);
 }
 
 bool Player::Raycast(const POS& origin, const POS& dir, PPOS hit, int maxDistance, int layer)

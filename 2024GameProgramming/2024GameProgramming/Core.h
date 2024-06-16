@@ -9,7 +9,7 @@
 class Core
 {
 private:
-	Core();
+	Core() = default;
 	~Core();
 public:
 	bool Init();

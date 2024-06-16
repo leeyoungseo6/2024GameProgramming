@@ -2,11 +2,6 @@
 
 Core* Core::pInst = nullptr;
 
-Core::Core()
-{
-
-}
-
 bool Core::Init()
 {
 	CursorVisible(false, 1);
@@ -14,7 +9,7 @@ bool Core::Init()
 	MapManager::GetInstance()->Init();
 	LayerMask::GetInstance()->Init();
 	_player = new Player({ 1, 1 });
-	_enemyVec.push_back(new Enemy({ 1, 3 }));
+	_enemyVec.push_back(new Enemy({ 1, 5 }));
 	return true;
 }
 
@@ -52,6 +47,7 @@ void Core::Update()
 			{
 				// ¿¡³Ê¹Ì »ç¸Á
 				(*iter)->Die();
+				delete (*iter);
 				iter = _enemyVec.erase(iter);
 			}
 		}
