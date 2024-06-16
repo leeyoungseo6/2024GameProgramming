@@ -8,18 +8,22 @@ bool MapManager::CheckRoad(POS pos) // ÇöÀç ³» À§Ä¡°¡ ·ÎµåÀÎÁö ¾Æ´ÑÁö È®ÀÎÇÏ´Â Ç
 
 void MapManager::Init()
 {
+	ReadFile();
+ }
+
+void MapManager::ReadFile()
+{
 	std::fstream stageData("SaveStageData.txt");
 	if (stageData.is_open()) {
-		char stage[10];	
+		char stage[10];
 		stageData.getline(stage, 10);
 		if (stageData.fail()) {
 			std::cout << "file error" << endl;
 		}
 		std::string name(stage);
 		LoadMap(name + ".txt");
-		//LoadMap("stage-1.txt");
 	}
- }
+}
 
 void MapManager::LoadMap(std::string name)
 {
@@ -42,6 +46,17 @@ void MapManager::LoadMap(std::string name)
 		}
 	}
 }
+
+void MapManager::NextStage() // ´ÙÀ½ ½ºÅ×ÀÌÁö·Î ³Ñ¾î°¨
+{
+	SaveMap(); // ´ÙÀ½¸ÊÀÌ¸§À¸·Î ÀúÀåÇÏ°í
+	ReadFile();
+}
+
+void MapManager::SaveMap() // Å¬¸®¾îÇÏ¸é ÀúÀåÇÒ°Å
+{
+}
+
 
 void MapManager::Render()
 {
