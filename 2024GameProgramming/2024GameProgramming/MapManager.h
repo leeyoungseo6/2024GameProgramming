@@ -29,7 +29,12 @@ public:
 	char _arrMap[MAP_HEIGHT][MAP_WIDTH] = {};
 
 	void Init();
-	bool CheckRoad(POS player);
+
+	void ReadFile();
 	void LoadMap(std::string name);
+	void NextStage();
+	void SaveMap();
+
+	bool CheckRoad(POS player);
 	void Render();
 };

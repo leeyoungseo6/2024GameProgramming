@@ -1,5 +1,6 @@
 #include "MapManager.h"
 #include "Core.h"
+#include <string>
 
 MapManager* MapManager::Instance = nullptr;
 bool MapManager::CheckRoad(POS pos) // ÇöÀç ³» À§Ä¡°¡ ·ÎµåÀÎÁö ¾Æ´ÑÁö È®ÀÎÇÏ´Â ÇÔ¼ö
@@ -11,18 +12,22 @@ bool MapManager::CheckRoad(POS pos) // ÇöÀç ³» À§Ä¡°¡ ·ÎµåÀÎÁö ¾Æ´ÑÁö È®ÀÎÇÏ´Â Ç
 
 void MapManager::Init()
 {
-	std::fstream stageData("SaveStageData.txt");
-	if (stageData.is_open()) {
-		char stage[10];	
-		stageData.getline(stage, 10);
-		if (stageData.fail()) {
+	ReadFile();
+ }
+
+void MapManager::ReadFile()
+{
+	std::fstream file("SaveStageData.txt");
+	if (file.is_open()) {
+		char stage[10];
+		file.getline(stage, 10);
+		if (file.fail()) {
 			std::cout << "file error" << endl;
 		}
 		std::string name(stage);
 		LoadMap(name + ".txt");
-		//LoadMap("stage-1.txt");
 	}
- }
+}
 
 void MapManager::LoadMap(std::string name)
 {
@@ -51,6 +56,29 @@ void MapManager::LoadMap(std::string name)
 		}
 	}
 }
+
+void MapManager::NextStage() // ´ÙÀ½ ½ºÅ×ÀÌÁö·Î ³Ñ¾î°¨
+{
+	SaveMap(); // ´ÙÀ½¸ÊÀÌ¸§À¸·Î ÀúÀåÇÏ°í
+	ReadFile();
+}
+
+void MapManager::SaveMap() // Å¬¸®¾îÇÏ¸é ÀúÀåÇÒ°Å
+{
+	std::fstream file("SaveStageData.txt");
+	if (file.is_open()) {
+		char stage[10];
+		file.getline(stage, 10);
+		if (file.fail()) {
+			std::cout << "file error" << endl;
+		}
+		std::string name(stage);
+		int newNum = std::stoi(name.substr(6));
+		file << "stage-" << ++newNum;
+		file.close();
+	}
+}
+ 
 
 void MapManager::Render()
 {
