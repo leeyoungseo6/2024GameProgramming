@@ -10,7 +10,7 @@ void MapManager::Init()
 {
 	std::fstream stageData("SaveStageData.txt");
 	if (stageData.is_open()) {
-		char stage[10];
+		char stage[10];	
 		stageData.getline(stage, 10);
 		if (stageData.fail()) {
 			std::cout << "file error" << endl;
