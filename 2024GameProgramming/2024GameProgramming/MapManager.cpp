@@ -74,7 +74,8 @@ void MapManager::SaveMap() // 클리어하면 저장할거
 		}
 		std::string name(stage);
 		int newNum = std::stoi(name.substr(6));
-		file << "stage-" << ++newNum;
+		file.write("stage-" + ++newNum, 10);
+		//file << "stage-" << ++newNum;
 		file.close();
 	}
 }

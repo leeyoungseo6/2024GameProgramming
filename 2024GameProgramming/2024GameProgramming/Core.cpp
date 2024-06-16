@@ -48,12 +48,13 @@ void Core::Update()
 				delete (*iter);
 				iter = _enemyVec.erase(iter);
 
-				if (_enemyVec.size() == 0)
+				if (_enemyVec.empty())
 				{
 					_player->Die();
 					delete _player;
 					_player = nullptr;
-					MapManager::GetInstance()->LoadMap("stage-2.txt");
+					MapManager::GetInstance()->NextStage();
+					//MapManager::GetInstance()->LoadMap("stage-2.txt");
 					return;
 				}
 			}
