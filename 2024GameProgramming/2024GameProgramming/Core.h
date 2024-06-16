@@ -29,6 +29,9 @@ public:
 	{
 		SAFE_DELETE(pInst);
 	}
+public:
+	void SpawnPlayer(POS spawnPos);
+	void SpawnEnemy(POS spawnPos);
 private:
 	static Core* pInst;
 	Player* _player;
