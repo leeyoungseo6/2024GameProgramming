@@ -1,4 +1,9 @@
 #include "Pos.h"
+_tagpos _tagpos::zero = { 0, 0 };
+_tagpos _tagpos::up = { 0, -1 };
+_tagpos _tagpos::down = { 0, 1 };
+_tagpos _tagpos::left = { -1, 0 };
+_tagpos _tagpos::right = { 1, 0 };
 
 _tagpos&& _tagpos::operator+(const _tagpos& b)
 {

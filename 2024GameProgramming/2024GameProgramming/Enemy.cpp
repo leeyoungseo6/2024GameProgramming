@@ -22,7 +22,9 @@ void Enemy::Update()
 			SortingLayer::GetInstance()->Move(_pos, _targetPath.top(), _sortingLayer);
 			_pos = _targetPath.top();
 			_targetPath.pop();
-			_moveDir = _targetPath.top() - _pos;
+
+			if (_targetPath.empty() == false)
+				_moveDir = _targetPath.top() - _pos;
 		}
 	}
 }
@@ -30,13 +32,13 @@ void Enemy::Update()
 void Enemy::Render()
 {
 	Gotoxy(_pos.x * 2, _pos.y);
-	if (_moveDir == POS{ 0, -1 })
+	if (_moveDir == POS::up)
 		cout << "¡â";
-	else if (_moveDir == POS{ -1, 0 })
+	else if (_moveDir == POS::left)
 		cout << "¢·";
-	else if (_moveDir == POS{ 1, 0 })
+	else if (_moveDir == POS::right)
 		cout << "¢¹";
-	else if (_moveDir == POS{ 0, 1 })
+	else if (_moveDir == POS::down)
 		cout << "¡ä";
 }
 

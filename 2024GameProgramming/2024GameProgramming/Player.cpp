@@ -3,14 +3,16 @@
 Player::Player(POS pos)
 	: Object(pos, 'a', Layer::Default, SortingLayerID::Agent)
 {
-	_dir = { 0, 0 };
+	_dir = POS::zero;
+	_isDead = false;
 }
 
 void Player::Update()
 {
-	if (_dir != POS{ 0, 0 })
+	if (_isDead) return;
+	if (_dir != POS::zero)
 	{
-		_dir = { 0, 0 };
+		_dir = POS::zero;
 		return;
 	}
 
@@ -21,19 +23,19 @@ void Player::Update()
 		{
 		case 'w':
 		case 'W':
-			_dir = { 0, -1 };
+			_dir = POS::up;
 			break;
 		case 'a':
 		case 'A':
-			_dir = { -1, 0 };
+			_dir = POS::left;
 			break;
 		case 's':
 		case 'S':
-			_dir = { 0, 1 };
+			_dir = POS::down;
 			break;
 		case 'd':
 		case 'D':
-			_dir = { 1, 0 };
+			_dir = POS::right;
 			break;
 		}
 	}
@@ -43,8 +45,16 @@ void Player::Update()
 
 void Player::Render()
 {
+	if (_isDead) return;
 	Gotoxy(_pos.x * 2, _pos.y);
 	cout << "¡Ý";
+}
+
+void Player::Die()
+{
+	_isDead = true;
+	LayerMask::GetInstance()->RemoveMask(_pos, _layer);
+	SortingLayer::GetInstance()->RemoveLayer(_pos, _sortingLayer);
 }
 
 void Player::Move(const POS dir)

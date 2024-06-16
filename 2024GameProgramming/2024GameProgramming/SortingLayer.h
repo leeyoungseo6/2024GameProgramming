@@ -34,6 +34,6 @@ public:
 	void Move(POS oldPos, POS newPos, SortingLayerID layer);
 	int Mask(POS pos);
 private:
-	bool _layers[(int)SortingLayerID::Count][MAP_HEIGHT][MAP_WIDTH] = { false };
+	int _layers[(int)SortingLayerID::Count][MAP_HEIGHT][MAP_WIDTH] = { false };
 };
 

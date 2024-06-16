@@ -8,23 +8,23 @@ bool SortingLayer::Init()
 
 void SortingLayer::AddLayer(POS pos, SortingLayerID layer)
 {
-	_layers[(int)layer][pos.y][pos.x] = true;
+	_layers[(int)layer][pos.y][pos.x] = 1;
 }
 
 void SortingLayer::RemoveLayer(POS pos, SortingLayerID layer)
 {
-	_layers[(int)layer][pos.y][pos.x] = false;
+	_layers[(int)layer][pos.y][pos.x] -= 1;
 }
 
 void SortingLayer::RemoveLayer(SortingLayerID layer)
 {
-	std::fill_n(&_layers[(int)layer][0][0], MAP_WIDTH * MAP_HEIGHT * (int)layer, false);
+	std::fill_n(&_layers[(int)layer][0][0], MAP_WIDTH * MAP_HEIGHT * (int)layer, 0);
 }
 
 void SortingLayer::Move(POS oldPos, POS newPos, SortingLayerID layer)
 {
-	_layers[(int)layer][oldPos.y][oldPos.x] = false;
-	_layers[(int)layer][newPos.y][newPos.x] = true;
+	_layers[(int)layer][oldPos.y][oldPos.x] -= 1;
+	_layers[(int)layer][newPos.y][newPos.x] += 1;
 }
 
 int SortingLayer::Mask(POS pos)

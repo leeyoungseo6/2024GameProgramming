@@ -14,7 +14,7 @@ bool Core::Init()
 	MapManager::GetInstance()->Init();
 	LayerMask::GetInstance()->Init();
 	_player = new Player({ 1, 1 });
-	_enemyVec.push_back(new Enemy({ 1, 10 }));
+	_enemyVec.push_back(new Enemy({ 1, 3 }));
 	return true;
 }
 
@@ -32,6 +32,7 @@ void Core::Run()
 
 void Core::Update()
 {
+	if (_player == nullptr) return;
 	_player->Update();
 	POS playerPos = _player->GetPos();
 	POS playerDir = _player->GetDirection();
@@ -43,8 +44,9 @@ void Core::Update()
 			if (-playerDir == (*iter)->GetDirection())
 			{
 				// ÇÃ·¹ÀÌ¾î »ç¸Á
-				Gotoxy(50, 25);
-				cout << "»ç¸Á";
+				_player->Die();
+				delete _player;
+				_player = nullptr;
 			}
 			else
 			{
@@ -58,11 +60,12 @@ void Core::Update()
 		(*iter)->SetDestination(playerPos);
 		(*iter)->Update();
 
-		if (playerPos == enemyPos)
+		if (playerPos == (*iter)->GetPos())
 		{
 			// ÇÃ·¹ÀÌ¾î »ç¸Á
-			Gotoxy(50, 25);
-			cout << "»ç¸Á";
+			_player->Die();
+			delete _player;
+			_player = nullptr;
 		}
 	}
 }
@@ -70,7 +73,8 @@ void Core::Update()
 void Core::Render()
 {
 	MapManager::GetInstance()->Render();
-	_player->Render();
+	if (_player != nullptr) 
+		_player->Render();
 	for (Enemy* enemy : _enemyVec)
 		enemy->Render();
 }
