@@ -1,9 +1,12 @@
 #include "MapManager.h"
+#include "Core.h"
 
 MapManager* MapManager::Instance = nullptr;
 bool MapManager::CheckRoad(POS pos) // 현재 내 위치가 로드인지 아닌지 확인하는 함수
 {
-	return _arrMap[pos.y][pos.x] == (char)OBJ_TYPE::ROAD ? true : false;
+	return _arrMap[pos.y][pos.x] == (char)OBJ_TYPE::ROAD
+		|| _arrMap[pos.y][pos.x] == (char)OBJ_TYPE::PLAYERPOS
+		|| _arrMap[pos.y][pos.x] == (char)OBJ_TYPE::ENEMYPOS;
 }
 
 void MapManager::Init()
@@ -36,8 +39,14 @@ void MapManager::LoadMap(std::string name)
 			}
 			else { // 맵 로드 성공 시 벽 부분에 레이어 추가
 				for (int j = 0; j < MAP_WIDTH; j++)
+				{
+					if (_arrMap[i][j] == (char)OBJ_TYPE::PLAYERPOS)
+						Core::GetInstance()->SpawnPlayer({ j, i });
+					if (_arrMap[i][j] == (char)OBJ_TYPE::ENEMYPOS)
+						Core::GetInstance()->SpawnEnemy({ j, i });
 					if (_arrMap[i][j] == (char)OBJ_TYPE::WALL)
 						LayerMask::GetInstance()->AddMask({ j, i }, Layer::Wall); // 레이캐스트를 위해 벽 있는 곳에 레이어 추가
+				}
 			}
 		}
 	}

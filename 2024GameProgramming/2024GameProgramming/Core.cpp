@@ -8,8 +8,6 @@ bool Core::Init()
 	AstarPathFinder::GetInstance()->Init();
 	MapManager::GetInstance()->Init();
 	LayerMask::GetInstance()->Init();
-	_player = new Player({ 1, 1 });
-	_enemyVec.push_back(new Enemy({ 1, 5 }));
 	return true;
 }
 
@@ -49,6 +47,15 @@ void Core::Update()
 				(*iter)->Die();
 				delete (*iter);
 				iter = _enemyVec.erase(iter);
+
+				if (_enemyVec.size() == 0)
+				{
+					_player->Die();
+					delete _player;
+					_player = nullptr;
+					MapManager::GetInstance()->LoadMap("stage-2.txt");
+					return;
+				}
 			}
 		}
 
@@ -89,4 +96,14 @@ void Core::FrameSync(unsigned int frameRate)
 			break;
 		}
 	}
+}
+
+void Core::SpawnPlayer(POS spawnPos)
+{
+	_player = new Player(spawnPos);
+}
+
+void Core::SpawnEnemy(POS spawnPos)
+{
+	_enemyVec.push_back(new Enemy(spawnPos));
 }
