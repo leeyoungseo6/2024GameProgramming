@@ -18,13 +18,11 @@ void Enemy::Update()
 		
 		if (_targetPath.empty() == false)
 		{
+			_moveDir = _targetPath.top() - _pos;
 			LayerMask::GetInstance()->Move(_pos, _targetPath.top(), _layer);
 			SortingLayer::GetInstance()->Move(_pos, _targetPath.top(), _sortingLayer);
 			_pos = _targetPath.top();
 			_targetPath.pop();
-
-			if (_targetPath.empty() == false)
-				_moveDir = _targetPath.top() - _pos;
 		}
 	}
 }
