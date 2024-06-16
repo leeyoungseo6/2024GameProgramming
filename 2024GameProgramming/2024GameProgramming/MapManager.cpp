@@ -1,5 +1,6 @@
 #include "MapManager.h"
 #include "Core.h"
+#include <string>
 
 MapManager* MapManager::Instance = nullptr;
 bool MapManager::CheckRoad(POS pos) // 현재 내 위치가 로드인지 아닌지 확인하는 함수
@@ -16,11 +17,11 @@ void MapManager::Init()
 
 void MapManager::ReadFile()
 {
-	std::fstream stageData("SaveStageData.txt");
-	if (stageData.is_open()) {
+	std::fstream file("SaveStageData.txt");
+	if (file.is_open()) {
 		char stage[10];
-		stageData.getline(stage, 10);
-		if (stageData.fail()) {
+		file.getline(stage, 10);
+		if (file.fail()) {
 			std::cout << "file error" << endl;
 		}
 		std::string name(stage);
@@ -64,8 +65,20 @@ void MapManager::NextStage() // 다음 스테이지로 넘어감
 
 void MapManager::SaveMap() // 클리어하면 저장할거
 {
+	std::fstream file("SaveStageData.txt");
+	if (file.is_open()) {
+		char stage[10];
+		file.getline(stage, 10);
+		if (file.fail()) {
+			std::cout << "file error" << endl;
+		}
+		std::string name(stage);
+		int newNum = std::stoi(name.substr(6));
+		file << "stage-" << ++newNum;
+		file.close();
+	}
 }
-
+ 
 
 void MapManager::Render()
 {
