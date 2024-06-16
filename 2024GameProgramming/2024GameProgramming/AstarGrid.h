@@ -3,9 +3,9 @@
 #include <algorithm>
 #include <math.h>
 #include "define.h"
-#include "Object.h"
-#include "AStarNode.h"
 #include "MapManager.h"
+#include "AStarNode.h"
+#include "Pos.h"
 
 class AStarGrid
 {

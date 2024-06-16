@@ -1,11 +1,12 @@
 #pragma once
 #include <string>
-#include<fstream>
-#include<iostream>
-#include "Object.h"
-
-const int MAP_WIDTH = 16;
-const int MAP_HEIGHT = 15;
+#include <fstream>
+#include <iostream>
+#include "LayerMask.h"
+#include "SortingLayer.h"
+#include "define.h"
+#include "Pos.h"
+#include "console.h"
 
 enum class OBJ_TYPE {
 	WALL='0', ROAD, PLUSTIMEITEM, REDUCEDSPEEDITEM, ANYATTACKITEM
@@ -28,10 +29,7 @@ public:
 	char _arrMap[MAP_WIDTH][MAP_HEIGHT] = {};
 
 	void Init();
-	bool CheckLoad(POS player);
+	bool CheckRoad(POS player);
 	void LoadMap(std::string name);
-	void Renderer();
+	void Render();
 };
-
-using std::cout;
-using std::endl;

@@ -1,14 +1,6 @@
 #pragma once
+#include <conio.h>
 #include "Object.h"
-#include "define.h"
-#include "LayerMask.h"
-
-typedef struct _tagraycasthit
-{
-public:
-	POS point;
-	Layer layer;
-} RaycastHit;
 
 class Player : public Object
 {
@@ -16,10 +8,12 @@ public:
 	Player(POS pos);
 	void Update() override;
 	void Render() override;
+	void Die();
 
-	const POS& GetPos() { return _pos; };
-	void Move();
-	bool Raycast(const POS& origin, const POS& dir, PPOS hit, int layer);
+	void Move(const POS dir);
+	bool Raycast(const POS& origin, const POS& dir, PPOS hit, int maxDistance, int layer);
+	const POS& GetDirection() { return _dir; };
 private:
 	POS _dir;
+	bool _isDead;
 };

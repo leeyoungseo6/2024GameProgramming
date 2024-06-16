@@ -3,6 +3,8 @@
 #include "console.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "AstarPathFinder.h"
+#include "MapManager.h"
 
 class Core
 {
@@ -30,6 +32,6 @@ public:
 private:
 	static Core* pInst;
 	Player* _player;
-	Enemy* _enemy;
+	vector<Enemy*> _enemyVec;
 };
 

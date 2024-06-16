@@ -1,38 +1,80 @@
 #include "Player.h"
-#include "MapManager.h"
 
 Player::Player(POS pos)
-	: Object(pos, 'a')
+	: Object(pos, 'a', Layer::Default, SortingLayerID::Agent)
 {
-	_dir = { 0, 1 };
+	_dir = POS::zero;
+	_isDead = false;
 }
 
 void Player::Update()
 {
-	Move();
+	if (_isDead) return;
+	if (_dir != POS::zero)
+	{
+		_dir = POS::zero;
+		return;
+	}
+
+	if (_kbhit())
+	{
+		char c = _getch();
+		switch (c)
+		{
+		case 'w':
+		case 'W':
+			_dir = POS::up;
+			break;
+		case 'a':
+		case 'A':
+			_dir = POS::left;
+			break;
+		case 's':
+		case 'S':
+			_dir = POS::down;
+			break;
+		case 'd':
+		case 'D':
+			_dir = POS::right;
+			break;
+		}
+	}
+
+	Move(_dir);
 }
 
 void Player::Render()
 {
-
+	if (_isDead) return;
+	Gotoxy(_pos.x * 2, _pos.y);
+	cout << "¡Ý";
 }
 
-void Player::Move()
+void Player::Die()
+{
+	_isDead = true;
+	LayerMask::GetInstance()->RemoveMask(_pos, _layer);
+	SortingLayer::GetInstance()->RemoveLayer(_pos, _sortingLayer);
+}
+
+void Player::Move(const POS dir)
 {
 	PPOS hit = new POS;
-	if (Raycast(_pos, _dir, hit, 1 << (int)Layer::Enemy | 1 << (int)Layer::Wall))
+	if (Raycast(_pos, dir, hit, MAP_HEIGHT, 1 << (int)Layer::Enemy | 1 << (int)Layer::Wall))
 	{
-		_pos = *hit;
-		cout << "¼º°ø";
+		POS nextPos = *hit - dir;
+		LayerMask::GetInstance()->Move(_pos, nextPos, _layer);
+		SortingLayer::GetInstance()->Move(_pos, nextPos, _sortingLayer);
+		_pos = nextPos;
 	}
 	delete hit;
 }
 
-bool Player::Raycast(const POS& origin, const POS& dir, PPOS hit, int layer)
+bool Player::Raycast(const POS& origin, const POS& dir, PPOS hit, int maxDistance, int layer)
 {
 	*hit = origin;
 	while (0 <= hit->x && hit->x <= MAP_WIDTH - 2
-		&& 0 <= hit->y && hit->y <= MAP_HEIGHT - 1)
+		&& 0 <= hit->y && hit->y <= MAP_HEIGHT - 1 && maxDistance--)
 	{
 		if (LayerMask::GetInstance()->Mask(*hit) & layer)
 			return true;

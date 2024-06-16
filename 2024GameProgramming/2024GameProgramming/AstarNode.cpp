@@ -15,7 +15,8 @@ int AStarNode::GetDistanceCost(const AStarNode& node)
 	int disX = abs(X - node.X);
 	int disY = abs(Y - node.Y);
 
-	return disX + disY;
+	if (disX > disY) return 14 * disY + 10 * (disX - disY);
+	return 14 * disX + 10 * (disY - disX);
 }
 
 void AStarNode::operator=(const AStarNode& b)

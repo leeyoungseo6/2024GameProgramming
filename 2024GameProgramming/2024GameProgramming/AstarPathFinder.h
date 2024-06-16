@@ -1,12 +1,13 @@
 #pragma once
-#include <Windows.h>
 #include "define.h"
-#include "AStarGrid.h"
+#include "Pos.h"
+#include "AstarGrid.h"
+
 class AstarPathFinder
 {
 private:
-	AstarPathFinder() {};
-	~AstarPathFinder();
+	AstarPathFinder() = default;
+	~AstarPathFinder() {};
 public:
 	bool Init();
 private:

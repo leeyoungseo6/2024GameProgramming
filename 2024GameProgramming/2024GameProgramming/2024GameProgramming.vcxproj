@@ -140,7 +140,8 @@
     <ClInclude Include="mci.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Title.h" />
+    <ClInclude Include="Pos.h" />
+    <ClInclude Include="SortingLayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AStarGrid.cpp" />
@@ -155,7 +156,8 @@
     <ClCompile Include="mci.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Title.cpp" />
+    <ClCompile Include="Pos.cpp" />
+    <ClCompile Include="SortingLayer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
