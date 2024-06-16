@@ -9,7 +9,7 @@
 #include "console.h"
 
 enum class OBJ_TYPE {
-	WALL='0', ROAD, PLUSTIMEITEM, REDUCEDSPEEDITEM, ANYATTACKITEM
+	WALL='0', ROAD, PLAYERPOS, ENEMYPOS, PLUSTIMEITEM, REDUCEDSPEEDITEM, ANYATTACKITEM
 };
 
 class MapManager {
@@ -26,7 +26,7 @@ private:
 	static MapManager* Instance;
 
 public:
-	char _arrMap[MAP_WIDTH][MAP_HEIGHT] = {};
+	char _arrMap[MAP_HEIGHT][MAP_WIDTH] = {};
 
 	void Init();
 	bool CheckRoad(POS player);

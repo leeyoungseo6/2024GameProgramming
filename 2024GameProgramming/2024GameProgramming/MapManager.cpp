@@ -57,6 +57,12 @@ void MapManager::Render()
 			else if (_arrMap[i][j] == (char)OBJ_TYPE::ROAD) {
 				cout << "  ";
 			}
+			else if (_arrMap[i][j] == (char)OBJ_TYPE::PLAYERPOS) {
+				cout << "  ";
+			}
+			else if (_arrMap[i][j] == (char)OBJ_TYPE::ENEMYPOS) {
+				cout << "  ";
+			}
 		}
 		cout << endl;
 	}
