@@ -83,6 +83,11 @@ void MapManager::SaveMap() // 클리어하면 저장할거
 	}
 	readFile.close();
 }
+
+void MapManager::RetryCurrentStage()
+{
+	ReadFile();
+}
  
 
 void MapManager::Render()

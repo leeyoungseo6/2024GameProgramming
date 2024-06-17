@@ -34,6 +34,7 @@ public:
 	void LoadMap(std::string name);
 	void NextStage();
 	void SaveMap();
+	void RetryCurrentStage();
 
 	bool CheckRoad(POS player);
 	void Render();
