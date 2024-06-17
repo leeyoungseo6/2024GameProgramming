@@ -19,17 +19,22 @@ stack<POS> AstarPathFinder::GetPath(const POS& startPos, const POS& targetPos)
 
 	while (currentNode != targetNode)
 	{
+		int cnt = 0;
 		for (auto neighbor : Grid.GetOpenList(*currentNode))
 		{
 			if (neighbor->IsWalkable == false || std::find(closedList.begin(), closedList.end(), neighbor) != closedList.end()) continue;
+			if (cnt == 0) currentNode->G = 0;
 			neighbor->G = currentNode->G + currentNode->GetDistanceCost(*neighbor);
 			neighbor->H = currentNode->GetDistanceCost(*targetNode);
 			neighbor->ParentNode = currentNode;
 			if (std::find(openList.begin(), openList.end(), neighbor) == openList.end())
 				openList.push_back(neighbor);
+			++cnt;
 		}
 
 		int idx = 0;
+		if (openList.empty())
+			return stack<POS>();
 		currentNode = openList.front();
 		for (int i = 0; i < openList.size(); i++)
 		{
