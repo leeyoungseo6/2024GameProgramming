@@ -65,19 +65,23 @@ void MapManager::NextStage() // 다음 스테이지로 넘어감
 
 void MapManager::SaveMap() // 클리어하면 저장할거
 {
-	std::fstream file("SaveStageData.txt");
-	if (file.is_open()) {
+	int newNum = 0;
+	std::fstream readFile("SaveStageData.txt");
+	if (readFile.is_open()) {
 		char stage[10];
-		file.getline(stage, 10);
-		if (file.fail()) {
+		readFile.getline(stage, 10);
+		if (readFile.fail()) {
 			std::cout << "file error" << endl;
 		}
 		std::string name(stage);
-		int newNum = std::stoi(name.substr(6));
-		file.write("stage-" + ++newNum, 10);
-		//file << "stage-" << ++newNum;
-		file.close();
+		newNum = std::stoi(name.substr(6));
 	}
+	std::ofstream writeFile("SaveStageData.txt", std::ios_base::ate);
+	if (writeFile.is_open()) {
+		//readFile.write("stage-" + ++newNum, 10);
+		writeFile << "stage-" << ++newNum;
+	}
+	readFile.close();
 }
  
 
