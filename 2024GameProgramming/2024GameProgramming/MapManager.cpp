@@ -37,7 +37,7 @@ void MapManager::LoadMap(std::string name)
 	if (readMap.is_open()) {
 		for (int i = 0; i < MAP_HEIGHT; ++i) {
 			// 다시 getline으로 읽을 때 기본꺼를 clear 해야함(여러 스테이지일 경우)
-			//readMap.clear();
+			readMap.clear();
 			readMap.getline(_arrMap[i], MAP_WIDTH);
 			if (readMap.fail()) {
 				cout << "맵 로딩에 문제가 생겼어용.." << endl;
@@ -55,6 +55,7 @@ void MapManager::LoadMap(std::string name)
 			}
 		}
 	}
+	readMap.close();
 }
 
 void MapManager::NextStage() // 다음 스테이지로 넘어감
