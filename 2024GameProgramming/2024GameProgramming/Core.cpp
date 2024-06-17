@@ -40,6 +40,14 @@ void Core::Update()
 				_player->Die();
 				delete _player;
 				_player = nullptr;
+				for (auto enemy : _enemyVec)
+				{
+					enemy->Die();
+					delete enemy;
+				}
+				_enemyVec.clear();
+				MapManager::GetInstance()->RetryCurrentStage();
+				return;
 			}
 			else
 			{
@@ -70,6 +78,14 @@ void Core::Update()
 			_player->Die();
 			delete _player;
 			_player = nullptr;
+			for (auto enemy : _enemyVec)
+			{
+				enemy->Die();
+				delete enemy;
+			}
+			_enemyVec.clear();
+			MapManager::GetInstance()->RetryCurrentStage();
+			return;
 		}
 	}
 }
