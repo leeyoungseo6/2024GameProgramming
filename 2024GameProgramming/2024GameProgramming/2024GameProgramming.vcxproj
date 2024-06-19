@@ -142,6 +142,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Pos.h" />
     <ClInclude Include="SortingLayer.h" />
+    <ClInclude Include="Title.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AStarGrid.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Pos.cpp" />
     <ClCompile Include="SortingLayer.cpp" />
+    <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,6 +5,9 @@ Core* Core::pInst = nullptr;
 bool Core::Init()
 {
 	CursorVisible(false, 1);
+	if (!Title::GetInstance()->Init()) {
+		return false;
+	}
 	AstarPathFinder::GetInstance()->Init();
 	MapManager::GetInstance()->Init();
 	LayerMask::GetInstance()->Init();
@@ -13,6 +16,7 @@ bool Core::Init()
 
 void Core::Run()
 {
+	
 	Init();
 	while (true)
 	{
