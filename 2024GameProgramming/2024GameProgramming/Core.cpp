@@ -5,10 +5,9 @@ Core* Core::pInst = nullptr;
 bool Core::Init()
 {
 	CursorVisible(false, 1);
-	Timer::GetInstance()->StartTimer(5);
-	/*if (!Title::GetInstance()->Init()) {
+	if (!Title::GetInstance()->Init()) {
 		return false;
-	}*/
+	}
 	AstarPathFinder::GetInstance()->Init();
 	MapManager::GetInstance()->Init();
 	LayerMask::GetInstance()->Init();
@@ -31,6 +30,7 @@ void Core::Run()
 void Core::Update()
 {
 	if (_player == nullptr) return;
+	Timer::GetInstance()->UpdateTimer();
 	_player->Update();
 	POS playerPos = _player->GetPos();
 	POS playerDir = _player->GetDirection();

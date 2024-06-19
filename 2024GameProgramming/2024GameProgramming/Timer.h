@@ -16,6 +16,9 @@ public:
 private:
 	static Timer* Instance;
 public:
-	bool StartTimer(int sTime);
+	int time = 0;
+public:
+	void StartTimer(int sTime);
+	bool UpdateTimer();
 
 };

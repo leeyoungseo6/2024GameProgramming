@@ -35,7 +35,7 @@ void MapManager::LoadMap(std::string name)
 
 	std::fstream readMap(name);
 	if (readMap.is_open()) {
-		for (int i = 0; i < MAP_HEIGHT; ++i) {
+		for (int i = 0; i < MAP_HEIGHT; ++i) { // 맵 불러오기
 			// 다시 getline으로 읽을 때 기본꺼를 clear 해야함(여러 스테이지일 경우)
 			readMap.clear();
 			readMap.getline(_arrMap[i], MAP_WIDTH);
@@ -54,6 +54,14 @@ void MapManager::LoadMap(std::string name)
 				}
 			}
 		}
+		char t[10];
+		readMap.getline(t, 10);
+		if (readMap.fail()) {
+			std::cout << "file error" << endl;
+		}
+		std::string name(t);
+		int time = std::stoi(name);
+		Timer::GetInstance()->StartTimer(time);
 	}
 }
 
