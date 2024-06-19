@@ -6,6 +6,7 @@
 #include "AstarPathFinder.h"
 #include "MapManager.h"
 #include "Title.h"
+#include "Timer.h"
 
 class Core
 {

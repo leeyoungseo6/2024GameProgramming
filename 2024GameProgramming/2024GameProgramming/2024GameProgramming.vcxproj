@@ -142,6 +142,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Pos.h" />
     <ClInclude Include="SortingLayer.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="Title.h" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +160,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Pos.cpp" />
     <ClCompile Include="SortingLayer.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

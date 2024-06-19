@@ -43,6 +43,12 @@
     <Filter Include="헤더 파일\Title">
       <UniqueIdentifier>{55033395-8a4b-4e8b-9c81-33b986371bdf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Timer">
+      <UniqueIdentifier>{7ed86a35-5539-4033-ad15-d5a2477967e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Timer">
+      <UniqueIdentifier>{e4f16a4a-7495-40af-9a33-dabd93f95a2c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h">
@@ -53,30 +59,6 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>헤더 파일\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="AStarGrid.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="AStarNode.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="AStarPathFinder.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="console.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Core.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="LayerMask.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="mci.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Pos.h">
       <Filter>헤더 파일</Filter>
@@ -89,6 +71,33 @@
     </ClInclude>
     <ClInclude Include="Title.h">
       <Filter>헤더 파일\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>헤더 파일\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="console.h">
+      <Filter>헤더 파일\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>헤더 파일\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="LayerMask.h">
+      <Filter>헤더 파일\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="mci.h">
+      <Filter>헤더 파일\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="AStarGrid.h">
+      <Filter>헤더 파일\AStar</Filter>
+    </ClInclude>
+    <ClInclude Include="AStarNode.h">
+      <Filter>헤더 파일\AStar</Filter>
+    </ClInclude>
+    <ClInclude Include="AStarPathFinder.h">
+      <Filter>헤더 파일\AStar</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>헤더 파일\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +145,9 @@
     </ClCompile>
     <ClCompile Include="Title.cpp">
       <Filter>소스 파일\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>소스 파일\Timer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
