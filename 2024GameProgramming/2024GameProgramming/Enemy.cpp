@@ -1,4 +1,4 @@
-#include "Enemy.h"
+ï»¿#include "Enemy.h"
 
 Enemy::Enemy(POS pos)
 	: Object(pos, 'a', Layer::Enemy, SortingLayerID::Agent)
@@ -26,6 +26,12 @@ void Enemy::Update()
 			_pos = _targetPath.top();
 			AstarPathFinder::GetInstance()->Grid.GetNode(_pos)->IsWalkable = false;
 			_targetPath.pop();
+
+			if (_targetPath.size() > 0)
+			{
+				SortingLayer::GetInstance()->Move(_nextPos, _targetPath.top(), SortingLayerID::EnemyNext);
+				_nextPos = _targetPath.top();
+			}
 		}
 	}
 }
@@ -35,13 +41,18 @@ void Enemy::Render()
 	Gotoxy(_pos.x * 2, _pos.y);
 	SetColor((int)COLOR::LIGHT_RED);
 	if (_moveDir == POS::up)
-		cout << "¡â";
+		cout << "â–³";
 	else if (_moveDir == POS::left)
-		cout << "¢·";
+		cout << "â—";
 	else if (_moveDir == POS::right)
-		cout << "¢¹";
+		cout << "â–·";
 	else if (_moveDir == POS::down)
-		cout << "¡ä";
+		cout << "â–½";
+
+	if (_nextPos != POS::zero)
+		Gotoxy(_nextPos.x * 2, _nextPos.y);
+	if (SortingLayer::GetInstance()->Mask(_nextPos) <= (int)SortingLayerID::EnemyNext)
+		cout << "ã†";
 	SetColor();
 }
 
@@ -49,6 +60,7 @@ void Enemy::Die()
 {
 	LayerMask::GetInstance()->RemoveMask(_pos, _layer);
 	SortingLayer::GetInstance()->RemoveLayer(_pos, _sortingLayer);
+	SortingLayer::GetInstance()->RemoveLayer(_nextPos, SortingLayerID::EnemyNext);
 	AstarPathFinder::GetInstance()->Grid.GetNode(_pos)->IsWalkable = true;
 }
 

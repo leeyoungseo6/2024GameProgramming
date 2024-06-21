@@ -23,8 +23,30 @@ void SortingLayer::RemoveLayer(SortingLayerID layer)
 
 void SortingLayer::Move(POS oldPos, POS newPos, SortingLayerID layer)
 {
-	_layers[(int)layer][oldPos.y][oldPos.x] -= 1;
+	if (_layers[(int)layer][oldPos.y][oldPos.x] > 0)
+		_layers[(int)layer][oldPos.y][oldPos.x] -= 1;
 	_layers[(int)layer][newPos.y][newPos.x] += 1;
+}
+
+void SortingLayer::Render(POS pos, string symbol, SortingLayerID layer)
+{
+	if (Mask(pos) <= (int)layer)
+	{
+		Move(POS::zero, pos, layer);
+		Gotoxy(pos.x, pos.y);
+		cout << symbol;
+	}
+}
+
+void SortingLayer::Render(POS oldPos, POS newPos, string symbol, SortingLayerID layer)
+{
+	if (oldPos != newPos)
+		Move(oldPos, newPos, layer);
+	if (Mask(newPos) <= (int)layer)
+	{
+		Gotoxy(newPos.x * 2, newPos.y);
+		cout << symbol;
+	}
 }
 
 int SortingLayer::Mask(POS pos)

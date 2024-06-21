@@ -6,6 +6,8 @@ using std::cout;
 using std::wcout;
 using std::endl;
 using std::max;
+using std::min;
+using std::string;
 using std::vector;
 using std::stack;
 #include <Windows.h>

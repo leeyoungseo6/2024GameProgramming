@@ -18,6 +18,7 @@ public:
 private:
 	stack<POS> _targetPath;
 	POS _targetPos;
+	POS _nextPos;
 	POS _moveDir;
 
 	clock_t _lastMovedTime;

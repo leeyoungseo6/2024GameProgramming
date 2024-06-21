@@ -4,6 +4,7 @@ Player::Player(POS pos)
 	: Object(pos, 'a', Layer::Default, SortingLayerID::Agent)
 {
 	_dir = POS::zero;
+	_prevPos = POS::zero;
 	_isDead = false;
 }
 
@@ -48,6 +49,7 @@ void Player::Move(const POS dir)
 	PPOS hit = new POS;
 	if (Raycast(_pos, dir, hit, MAP_HEIGHT, 1 << (int)Layer::Enemy | 1 << (int)Layer::Wall))
 	{
+		_prevPos = _pos;
 		POS nextPos = *hit - dir;
 		LayerMask::GetInstance()->Move(_pos, nextPos, _layer);
 		SortingLayer::GetInstance()->Move(_pos, nextPos, _sortingLayer);
@@ -59,8 +61,8 @@ void Player::Move(const POS dir)
 void Player::Render()
 {
 	if (_isDead) return;
-	Gotoxy(_pos.x * 2, _pos.y);
 	SetColor((int)COLOR::LIGHT_YELLOW);
+	Gotoxy(_pos.x * 2, _pos.y);
 	cout << "¡Ý";
 	SetColor();
 }
