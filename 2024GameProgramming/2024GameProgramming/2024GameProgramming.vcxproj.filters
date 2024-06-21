@@ -34,6 +34,15 @@
     <Filter Include="소스 파일\Map">
       <UniqueIdentifier>{b0d5a578-f97f-4f10-b1df-a5ac4c4fd9dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Title">
+      <UniqueIdentifier>{b693529d-1502-4b3c-97e2-3eec9103c02a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Map">
+      <UniqueIdentifier>{e945d321-bea6-436f-be08-6e4816f8d69d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Title">
+      <UniqueIdentifier>{55033395-8a4b-4e8b-9c81-33b986371bdf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h">
@@ -69,17 +78,17 @@
     <ClInclude Include="Object.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="MapManager.h">
-      <Filter>소스 파일\Map</Filter>
-    </ClInclude>
     <ClInclude Include="Pos.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="SortingLayer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="MapManager.h">
+      <Filter>헤더 파일\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>헤더 파일\Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -125,8 +134,8 @@
     <ClCompile Include="SortingLayer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="Title.cpp">
+      <Filter>소스 파일\Title</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

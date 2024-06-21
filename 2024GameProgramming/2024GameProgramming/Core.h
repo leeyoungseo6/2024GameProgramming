@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include "AstarPathFinder.h"
 #include "MapManager.h"
+#include "Title.h"
 
 class Core
 {

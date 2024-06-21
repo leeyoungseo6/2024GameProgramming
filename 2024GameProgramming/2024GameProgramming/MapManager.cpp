@@ -55,7 +55,6 @@ void MapManager::LoadMap(std::string name)
 			}
 		}
 	}
-	readMap.close();
 }
 
 void MapManager::NextStage() // 다음 스테이지로 넘어감

@@ -24,7 +24,6 @@ public:
 	void TitleRenderer();
 	bool Init();
 	MENU MenuRender();
-	void InfoRender();
 	KEY KeyController();
 	void EnterAnimation();
 };
