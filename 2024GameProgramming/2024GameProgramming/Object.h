@@ -11,7 +11,7 @@ public:
 	Object(POS pos, char symbol, Layer layer, SortingLayerID sortingLayer);
 	virtual void Update() abstract;
 	virtual void Render() {};
-	const POS& GetPos() { return _pos; };
+	POS& GetPos() { return _pos; };
 protected:
 	POS _pos;
 	char _symbol;

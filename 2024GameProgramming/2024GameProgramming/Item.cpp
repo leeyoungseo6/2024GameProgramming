@@ -5,11 +5,3 @@ Item::Item(POS pos)
 {
 
 }
-
-void Item::Update()
-{
-}
-
-void Item::Render()
-{
-}

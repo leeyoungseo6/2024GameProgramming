@@ -4,58 +4,46 @@ Player::Player(POS pos)
 	: Object(pos, 'a', Layer::Default, SortingLayerID::Agent)
 {
 	_dir = POS::zero;
-	_prevPos = POS::zero;
 	_isDead = false;
 }
 
 void Player::Update()
 {
 	if (_isDead) return;
-	POS dir = POS::zero;
+	Move();
+}
 
+void Player::Move()
+{
+	_dir = POS::zero;
 	if (_kbhit())
 	{
 		char c = _getch();
 		switch (c)
 		{
-		case 'w':
 		case 'W':
-			dir = POS::up;
-			break;
-		case 'a':
+		case 'w': _dir = POS::up; break;
+
 		case 'A':
-			dir = POS::left;
-			break;
-		case 's':
+		case 'a': _dir = POS::left; break;
+
 		case 'S':
-			dir = POS::down;
-			break;
-		case 'd':
+		case 's': _dir = POS::down; break;
+
 		case 'D':
-			dir = POS::right;
-			break;
+		case 'd': _dir = POS::right; break;
 		}
 	}
+	else return;
 
-	if (dir != POS::zero)
+	POS hit;
+	if (Raycast(_pos, _dir, &hit, MAP_HEIGHT, 1 << (int)Layer::Enemy | 1 << (int)Layer::Wall))
 	{
-		_dir = dir;
-		Move(dir);
-	}
-}
-
-void Player::Move(const POS dir)
-{
-	PPOS hit = new POS;
-	if (Raycast(_pos, dir, hit, MAP_HEIGHT, 1 << (int)Layer::Enemy | 1 << (int)Layer::Wall))
-	{
-		_prevPos = _pos;
-		POS nextPos = *hit - dir;
+		POS nextPos = hit - _dir;
 		LayerMask::GetInstance()->Move(_pos, nextPos, _layer);
 		SortingLayer::GetInstance()->Move(_pos, nextPos, _sortingLayer);
 		_pos = nextPos;
 	}
-	delete hit;
 }
 
 void Player::Render()

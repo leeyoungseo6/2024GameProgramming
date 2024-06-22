@@ -10,11 +10,10 @@ public:
 	void Render() override;
 	void Die();
 
-	void Move(const POS dir);
+	void Move();
 	bool Raycast(const POS& origin, const POS& dir, PPOS hit, int maxDistance, int layer);
 	const POS& GetDirection() { return _dir; };
 private:
 	POS _dir;
-	POS _prevPos;
 	bool _isDead;
 };

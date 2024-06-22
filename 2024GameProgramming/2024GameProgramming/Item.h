@@ -5,7 +5,8 @@ class Item : public Object
 {
 public:
 	Item(POS pos);
-	void Update() override;
-	void Render() override;
+	void Update() override {};
+	virtual void Render() abstract;
+	virtual void GetItem() abstract;
 };
 

@@ -1,5 +1,5 @@
 #include "MapManager.h"
-#include "Core.h"
+#include "ObjectManager.h"
 #include <string>
 
 MapManager* MapManager::Instance = nullptr;
@@ -42,16 +42,22 @@ void MapManager::LoadMap(std::string name)
 			if (readMap.fail()) {
 				cout << "맵 로딩에 문제가 생겼어용.." << endl;
 			}
-			else { // 맵 로드 성공 시 벽 부분에 레이어 추가
-				for (int j = 0; j < MAP_WIDTH; j++)
+			else { // 맵 로드 성공
+				for (int j = 0; j < MAP_WIDTH; ++j)
 				{
 					if (_arrMap[i][j] == (char)OBJ_TYPE::PLAYERPOS)
-						Core::GetInstance()->SpawnPlayer({ j, i });
-					if (_arrMap[i][j] == (char)OBJ_TYPE::ENEMYPOS)
-						Core::GetInstance()->SpawnEnemy({ j, i });
+						ObjectManager::GetInstance()->SpawnPlayer({ j, i });
 					if (_arrMap[i][j] == (char)OBJ_TYPE::WALL)
 						LayerMask::GetInstance()->AddMask({ j, i }, Layer::Wall); // 레이캐스트를 위해 벽 있는 곳에 레이어 추가
 				}
+			}
+		}
+
+		for (int i = 0; i < MAP_HEIGHT; ++i) {
+			for (int j = 0; j < MAP_WIDTH; ++j)
+			{
+				if (_arrMap[i][j] == (char)OBJ_TYPE::ENEMYPOS)
+					ObjectManager::GetInstance()->SpawnEnemy({ j, i });
 			}
 		}
 	}

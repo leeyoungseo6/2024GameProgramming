@@ -140,8 +140,10 @@
     <ClInclude Include="MapManager.h" />
     <ClInclude Include="mci.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Pos.h" />
+    <ClInclude Include="ReduceSpeedItem.h" />
     <ClInclude Include="SortingLayer.h" />
     <ClInclude Include="Title.h" />
   </ItemGroup>
@@ -158,8 +160,10 @@
     <ClCompile Include="MapManager.cpp" />
     <ClCompile Include="mci.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Pos.cpp" />
+    <ClCompile Include="ReduceSpeedItem.cpp" />
     <ClCompile Include="SortingLayer.cpp" />
     <ClCompile Include="Title.cpp" />
   </ItemGroup>

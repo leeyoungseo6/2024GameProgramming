@@ -43,6 +43,12 @@
     <Filter Include="헤더 파일\Title">
       <UniqueIdentifier>{55033395-8a4b-4e8b-9c81-33b986371bdf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Object\Item">
+      <UniqueIdentifier>{40a97411-8f10-4258-a983-0afaa3c6aa6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Object\Item">
+      <UniqueIdentifier>{0399a8d8-a14d-4088-9168-7fa3dd9bc3a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h">
@@ -90,6 +96,15 @@
     <ClInclude Include="Title.h">
       <Filter>헤더 파일\Title</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>헤더 파일\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ReduceSpeedItem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>헤더 파일\Object\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console.cpp">
@@ -136,6 +151,15 @@
     </ClCompile>
     <ClCompile Include="Title.cpp">
       <Filter>소스 파일\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>소스 파일\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>소스 파일\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ReduceSpeedItem.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
