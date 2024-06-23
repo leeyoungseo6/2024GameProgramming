@@ -105,6 +105,9 @@
     <ClInclude Include="Item.h">
       <Filter>헤더 파일\Object\Item</Filter>
     </ClInclude>
+    <ClInclude Include="AnyAttackItem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console.cpp">
@@ -159,7 +162,10 @@
       <Filter>소스 파일\Object\Item</Filter>
     </ClCompile>
     <ClCompile Include="ReduceSpeedItem.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="AnyAttackItem.cpp">
+      <Filter>소스 파일\Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

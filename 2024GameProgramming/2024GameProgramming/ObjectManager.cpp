@@ -12,23 +12,19 @@ void ObjectManager::Update()
 {
 	if (_player == nullptr) return;
 
-	for (auto enemy : _enemyVec)
-		if (_player->GetPos() == enemy->GetPos())
-		{
-			PlayerDie();
-			Sleep(1000);
-			EnemyDie();
-			return;
-		}
-
 	_player->Update();
-	POS playerPos = _player->GetPos();
-	POS playerDir = _player->GetDirection();
+	ItemUpdate();
+	EnemyUpdate();
+}
+
+void ObjectManager::ItemUpdate()
+{
+	int deltaTime = clock() - _prevTime;
+	_prevTime = clock();
 
 	if (_isSpeedReduced > 0)
 	{
-		_isSpeedReduced -= (clock() - _prevTime);
-		_prevTime = clock();
+		_isSpeedReduced -= deltaTime;
 		if (_isSpeedReduced <= 0)
 		{
 			_isSpeedReduced = 0;
@@ -37,36 +33,26 @@ void ObjectManager::Update()
 		}
 	}
 
-	//if (_canAnyAttack > 0)
-	//{
-	//	_canAnyAttack -= 1 / 60;
-	//	if (_canAnyAttack <= 0)
-	//
-	//}
+	if (_canAnyAttack > 0)
+	{
+		_canAnyAttack -= deltaTime;
+		if (_canAnyAttack <= 0)
+			_canAnyAttack = 0;
+	}
+}
 
-	for (auto iter = _itemVec.begin(); iter < _itemVec.end(); iter++)
-		if (playerPos == (*iter)->GetPos())
-		{
-			(*iter)->GetItem();
-			delete (*iter);
-			iter = _itemVec.erase(iter);
-			break;
-		}
+void ObjectManager::EnemyUpdate()
+{
+	POS playerPos = _player->GetPos();
+	POS playerDir = _player->GetDirection();
 
 	for (auto iter = _enemyVec.begin(); iter < _enemyVec.end(); iter++)
 	{
 		POS enemyPos = (*iter)->GetPos();
+		POS enemyDir = (*iter)->GetDirection();
 		if (playerPos + playerDir == enemyPos)
 		{
-			if (-playerDir == (*iter)->GetDirection())
-			{
-				Core::GetInstance()->Render();
-				PlayerDie();
-				Sleep(1000);
-				EnemyDie();
-				return;
-			}
-			else
+			if (-playerDir != enemyDir || _canAnyAttack)
 			{
 				// ¿¡³Ê¹Ì »ç¸Á
 				(*iter)->Die();
@@ -82,10 +68,27 @@ void ObjectManager::Update()
 					return;
 				}
 			}
+			else
+			{
+				Core::GetInstance()->Render();
+				PlayerDie();
+				Sleep(1000);
+				EnemyDie();
+				return;
+			}
 		}
 
 		if (iter == _enemyVec.end()) return;
 		(*iter)->Update();
+
+		if (playerPos == (*iter)->GetPos())
+		{
+			Core::GetInstance()->Render();
+			PlayerDie();
+			Sleep(1000);
+			EnemyDie();
+			return;
+		}
 	}
 }
 
@@ -116,10 +119,42 @@ void ObjectManager::SpawnItem(const POS& spawnPos)
 	int rd = rand() % 100;
 	if (rd < 100)
 	{
-		rd = rand() % 1;
+		rd = rand() % 2;
 		if (rd < 1)
 			_itemVec.push_back(new ReduceSpeedItem(spawnPos));
+		else if (rd < 2)
+			_itemVec.push_back(new AnyAttackItem(spawnPos));
 
+	}
+}
+
+void ObjectManager::SpawnItem(const POS& spawnPos, OBJ_TYPE type)
+{
+	switch (type)
+	{
+	case OBJ_TYPE::PLUSTIMEITEM: 
+		_itemVec.push_back(new ReduceSpeedItem(spawnPos));
+		break;
+	case OBJ_TYPE::REDUCEDSPEEDITEM:
+		_itemVec.push_back(new ReduceSpeedItem(spawnPos));
+		break;
+	case OBJ_TYPE::ANYATTACKITEM: 
+		_itemVec.push_back(new AnyAttackItem(spawnPos));
+		break;
+	}
+}
+
+void ObjectManager::GetItem(const POS& pos)
+{
+	for (auto iter = _itemVec.begin(); iter < _itemVec.end(); iter++)
+	{
+		if ((*iter)->GetPos() == pos)
+		{
+			(*iter)->GetItem();
+			delete (*iter);
+			iter = _itemVec.erase(iter);
+			break;
+		}
 	}
 }
 
@@ -132,7 +167,7 @@ void ObjectManager::ReduceEnemySpeed()
 
 void ObjectManager::EnableAnyAttack()
 {
-
+	_canAnyAttack = AnyAttackItem::duration;
 }
 
 void ObjectManager::PlayerDie()

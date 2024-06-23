@@ -5,6 +5,7 @@ Core* Core::pInst = nullptr;
 
 bool Core::Init()
 {
+	srand((unsigned int)time(NULL));
 	CursorVisible(false, 1);
 	if (!Title::GetInstance()->Init()) {
 		return false;

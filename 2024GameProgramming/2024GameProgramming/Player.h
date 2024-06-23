@@ -2,6 +2,12 @@
 #include <conio.h>
 #include "Object.h"
 
+struct RaycastHit
+{
+	POS point;
+	int distance;
+};
+
 class Player : public Object
 {
 public:
@@ -11,7 +17,7 @@ public:
 	void Die();
 
 	void Move();
-	bool Raycast(const POS& origin, const POS& dir, PPOS hit, int maxDistance, int layer);
+	bool Raycast(const POS& origin, const POS& dir, RaycastHit* hit, int maxDistance, int layer);
 	const POS& GetDirection() { return _dir; };
 private:
 	POS _dir;

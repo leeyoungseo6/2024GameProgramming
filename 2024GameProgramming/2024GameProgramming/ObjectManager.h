@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "Item.h"
 #include "ReduceSpeedItem.h"
+#include "AnyAttackItem.h"
 
 class ObjectManager
 {
@@ -17,9 +18,13 @@ public:
 	void SpawnPlayer(const POS& spawnPos);
 	void SpawnEnemy(const POS& spawnPos);
 	void SpawnItem(const POS& spawnPos);
+	void SpawnItem(const POS& spawnPos, OBJ_TYPE type);
+	void GetItem(const POS& pos);
 	void ReduceEnemySpeed();
 	void EnableAnyAttack();
 private:
+	void EnemyUpdate();
+	void ItemUpdate();
 	void PlayerDie();
 	void EnemyDie();
 public:

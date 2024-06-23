@@ -56,6 +56,7 @@ void Enemy::Render()
 
 	if (_nextPos != POS::zero && SortingLayer::GetInstance()->Mask(_nextPos) <= (int)SortingLayerID::EnemyNext)
 	{
+		SetColor((int)COLOR::RED);
 		Gotoxy(_nextPos.x * 2, _nextPos.y);
 		cout << "ㆍ";
 	}

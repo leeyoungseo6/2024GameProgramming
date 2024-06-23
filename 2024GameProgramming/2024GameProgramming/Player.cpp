@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "ObjectManager.h"
 
 Player::Player(POS pos)
 	: Object(pos, 'a', Layer::Default, SortingLayerID::Agent)
@@ -36,12 +37,16 @@ void Player::Move()
 	}
 	else return;
 
-	POS hit;
+	RaycastHit hit;
 	if (Raycast(_pos, _dir, &hit, MAP_HEIGHT, 1 << (int)Layer::Enemy | 1 << (int)Layer::Wall))
 	{
-		POS nextPos = hit - _dir;
+		POS nextPos = hit.point - _dir;
 		LayerMask::GetInstance()->Move(_pos, nextPos, _layer);
 		SortingLayer::GetInstance()->Move(_pos, nextPos, _sortingLayer);
+
+		if (Raycast(_pos, _dir, &hit, hit.distance, 1 << (int)Layer::Item))
+			ObjectManager::GetInstance()->GetItem(hit.point);
+
 		_pos = nextPos;
 	}
 }
@@ -62,17 +67,20 @@ void Player::Die()
 	SortingLayer::GetInstance()->RemoveLayer(_pos, _sortingLayer);
 }
 
-bool Player::Raycast(const POS& origin, const POS& dir, PPOS hit, int maxDistance, int layer)
+bool Player::Raycast(const POS& origin, const POS& dir, RaycastHit* hit, int maxDistance, int layer)
 {
-	*hit = origin;
-	while (0 <= hit->x && hit->x <= MAP_WIDTH - 2
-		&& 0 <= hit->y && hit->y <= MAP_HEIGHT - 1 && maxDistance--)
+	hit->point = origin;
+	hit->distance = 0;
+	while (0 <= hit->point.x && hit->point.x <= MAP_WIDTH - 2
+		&& 0 <= hit->point.y && hit->point.y <= MAP_HEIGHT - 1 && maxDistance--)
 	{
-		if (LayerMask::GetInstance()->Mask(*hit) & layer)
+		if (LayerMask::GetInstance()->Mask(hit->point) & layer)
 			return true;
-		*hit += dir;
+		hit->point = hit->point + dir;
+		hit->distance += 1;
 	}
 
-	*hit = origin;
+	hit->point = origin;
+	hit->distance = 0;
 	return false;
 }
