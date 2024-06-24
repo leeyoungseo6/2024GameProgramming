@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "ObjectManager.h"
+#include "mci.h"
 
 Player::Player(POS pos)
 	: Object(pos, 'a', Layer::Default, SortingLayerID::Agent)
@@ -38,8 +39,12 @@ void Player::Move()
 	else return;
 
 	RaycastHit hit;
-	if (Raycast(_pos, _dir, &hit, MAP_HEIGHT, 1 << (int)Layer::Enemy | 1 << (int)Layer::Wall))
+	if (Raycast(_pos, _dir, &hit, MAP_HEIGHT, (1 << (int)Layer::Wall) | (1 << (int)Layer::Enemy)))
 	{
+		if (hit.layer == (int)Layer::Enemy)
+			PlaySFX(TEXT("enemyDie.wav"));
+		else
+			PlaySFX(TEXT("wallKick.wav"));
 		POS nextPos = hit.point - _dir;
 		LayerMask::GetInstance()->Move(_pos, nextPos, _layer);
 		SortingLayer::GetInstance()->Move(_pos, nextPos, _sortingLayer);
@@ -74,8 +79,12 @@ bool Player::Raycast(const POS& origin, const POS& dir, RaycastHit* hit, int max
 	while (0 <= hit->point.x && hit->point.x <= MAP_WIDTH - 2
 		&& 0 <= hit->point.y && hit->point.y <= MAP_HEIGHT - 1 && maxDistance--)
 	{
-		if (LayerMask::GetInstance()->Mask(hit->point) & layer)
+		int result = LayerMask::GetInstance()->Mask(hit->point) & layer;
+		if (result)
+		{
+			hit->layer = (int)log2(result);
 			return true;
+		}
 		hit->point = hit->point + dir;
 		hit->distance += 1;
 	}
