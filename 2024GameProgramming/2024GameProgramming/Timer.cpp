@@ -1,5 +1,4 @@
 #include "Timer.h"
-#include "console.h"
 
 Timer* Timer::Instance = nullptr;
 
@@ -15,7 +14,6 @@ bool Timer::UpdateTimer()
 
     end = clock();
     if (double(end - start) / CLOCKS_PER_SEC >= time) {
-        Gotoxy(50, 25);
         std::cout << "しいしししししししししししししししししししししししししししししししししししししししししししし";
         return true;
     }

@@ -1,5 +1,6 @@
 #include "MapManager.h"
 #include "ObjectManager.h"
+#include "Timer.h"
 #include <string>
 
 MapManager* MapManager::Instance = nullptr;
@@ -52,6 +53,14 @@ void MapManager::LoadMap(std::string name)
 				}
 			}
 		}
+		char t[10];
+		readMap.getline(t, 10);
+		if (readMap.fail()) {
+			std::cout << "file error" << endl;
+		}
+		std::string name(t);
+		int time = std::stoi(name);
+		Timer::GetInstance()->StartTimer(time);
 
 		for (int i = 0; i < MAP_HEIGHT; ++i) {
 			for (int j = 0; j < MAP_WIDTH; ++j)

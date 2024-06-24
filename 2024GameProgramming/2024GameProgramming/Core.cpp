@@ -1,5 +1,6 @@
 #include "Core.h"
 #include "ObjectManager.h"
+#include "Timer.h"
 
 Core* Core::pInst = nullptr;
 
@@ -33,6 +34,7 @@ void Core::Run()
 void Core::Update()
 {
 	ObjectManager::GetInstance()->Update();
+	Timer::GetInstance()->UpdateTimer();
 }
 
 void Core::Render()
