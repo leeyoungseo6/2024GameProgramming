@@ -1,5 +1,5 @@
 #include "MapManager.h"
-#include "Core.h"
+#include "ObjectManager.h"
 #include <string>
 
 MapManager* MapManager::Instance = nullptr;
@@ -35,33 +35,31 @@ void MapManager::LoadMap(std::string name)
 
 	std::fstream readMap(name);
 	if (readMap.is_open()) {
-		for (int i = 0; i < MAP_HEIGHT; ++i) { // 맵 불러오기
+		for (int i = 0; i < MAP_HEIGHT; ++i) {
 			// 다시 getline으로 읽을 때 기본꺼를 clear 해야함(여러 스테이지일 경우)
 			readMap.clear();
 			readMap.getline(_arrMap[i], MAP_WIDTH);
 			if (readMap.fail()) {
 				cout << "맵 로딩에 문제가 생겼어용.." << endl;
 			}
-			else { // 맵 로드 성공 시 벽 부분에 레이어 추가
-				for (int j = 0; j < MAP_WIDTH; j++)
+			else { // 맵 로드 성공
+				for (int j = 0; j < MAP_WIDTH; ++j)
 				{
 					if (_arrMap[i][j] == (char)OBJ_TYPE::PLAYERPOS)
-						Core::GetInstance()->SpawnPlayer({ j, i });
-					if (_arrMap[i][j] == (char)OBJ_TYPE::ENEMYPOS)
-						Core::GetInstance()->SpawnEnemy({ j, i });
+						ObjectManager::GetInstance()->SpawnPlayer({ j, i });
 					if (_arrMap[i][j] == (char)OBJ_TYPE::WALL)
 						LayerMask::GetInstance()->AddMask({ j, i }, Layer::Wall); // 레이캐스트를 위해 벽 있는 곳에 레이어 추가
 				}
 			}
 		}
-		char t[10];
-		readMap.getline(t, 10);
-		if (readMap.fail()) {
-			std::cout << "file error" << endl;
+
+		for (int i = 0; i < MAP_HEIGHT; ++i) {
+			for (int j = 0; j < MAP_WIDTH; ++j)
+			{
+				if (_arrMap[i][j] == (char)OBJ_TYPE::ENEMYPOS)
+					ObjectManager::GetInstance()->SpawnEnemy({ j, i });
+			}
 		}
-		std::string name(t);
-		int time = std::stoi(name);
-		Timer::GetInstance()->StartTimer(time);
 	}
 }
 

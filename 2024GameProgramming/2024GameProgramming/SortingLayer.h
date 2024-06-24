@@ -1,10 +1,12 @@
 #pragma once
+#include <string>
 #include "define.h"
 #include "Pos.h"
+#include "console.h"
 
 enum class SortingLayerID
 {
-	BG, Agent, Top, Count
+	BG, EnemyNext, Agent, Top, Count
 };
 
 class SortingLayer
@@ -32,6 +34,8 @@ public:
 	void RemoveLayer(POS pos, SortingLayerID layer);
 	void RemoveLayer(SortingLayerID layer);
 	void Move(POS oldPos, POS newPos, SortingLayerID layer);
+	void Render(POS pos, string symbol, SortingLayerID layer);
+	void Render(POS oldPos, POS newPos, string symbol, SortingLayerID layer);
 	int Mask(POS pos);
 private:
 	int _layers[(int)SortingLayerID::Count][MAP_HEIGHT][MAP_WIDTH] = { false };

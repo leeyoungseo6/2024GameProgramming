@@ -1,9 +1,11 @@
 #include "Core.h"
+#include "ObjectManager.h"
 
 Core* Core::pInst = nullptr;
 
 bool Core::Init()
 {
+	srand((unsigned int)time(NULL));
 	CursorVisible(false, 1);
 	if (!Title::GetInstance()->Init()) {
 		return false;
@@ -11,12 +13,13 @@ bool Core::Init()
 	AstarPathFinder::GetInstance()->Init();
 	MapManager::GetInstance()->Init();
 	LayerMask::GetInstance()->Init();
+	ObjectManager::GetInstance()->Init();
+	ObjectManager::GetInstance()->SpawnItem({ 3, 1 });
 	return true;
 }
 
 void Core::Run()
 {
-	
 	Init();
 	while (true)
 	{
@@ -29,79 +32,13 @@ void Core::Run()
 
 void Core::Update()
 {
-	if (_player == nullptr) return;
-	Timer::GetInstance()->UpdateTimer();
-	_player->Update();
-	POS playerPos = _player->GetPos();
-	POS playerDir = _player->GetDirection();
-	for (auto iter = _enemyVec.begin(); iter < _enemyVec.end(); iter++)
-	{
-		POS enemyPos = (*iter)->GetPos();
-		if (playerPos + playerDir == enemyPos)
-		{
-			if (-playerDir == (*iter)->GetDirection())
-			{
-				// 플레이어 사망
-				_player->Die();
-				delete _player;
-				_player = nullptr;
-				for (auto enemy : _enemyVec)
-				{
-					enemy->Die();
-					delete enemy;
-				}
-				_enemyVec.clear();
-				MapManager::GetInstance()->RetryCurrentStage();
-				return;
-			}
-			else
-			{
-				// 에너미 사망
-				(*iter)->Die();
-				delete (*iter);
-				iter = _enemyVec.erase(iter);
-
-				if (_enemyVec.empty())
-				{
-					_player->Die();
-					delete _player;
-					_player = nullptr;
-					MapManager::GetInstance()->NextStage();
-					//MapManager::GetInstance()->LoadMap("stage-2.txt");
-					return;
-				}
-			}
-		}
-
-		if (iter == _enemyVec.end()) return;
-		(*iter)->SetDestination(playerPos);
-		(*iter)->Update();
-
-		if (playerPos == (*iter)->GetPos())
-		{
-			// 플레이어 사망
-			_player->Die();
-			delete _player;
-			_player = nullptr;
-			for (auto enemy : _enemyVec)
-			{
-				enemy->Die();
-				delete enemy;
-			}
-			_enemyVec.clear();
-			MapManager::GetInstance()->RetryCurrentStage();
-			return;
-		}
-	}
+	ObjectManager::GetInstance()->Update();
 }
 
 void Core::Render()
 {
 	MapManager::GetInstance()->Render();
-	if (_player != nullptr) 
-		_player->Render();
-	for (Enemy* enemy : _enemyVec)
-		enemy->Render();
+	ObjectManager::GetInstance()->Render();
 }
 
 void Core::FrameSync(unsigned int frameRate)
@@ -118,14 +55,4 @@ void Core::FrameSync(unsigned int frameRate)
 			break;
 		}
 	}
-}
-
-void Core::SpawnPlayer(POS spawnPos)
-{
-	_player = new Player(spawnPos);
-}
-
-void Core::SpawnEnemy(POS spawnPos)
-{
-	_enemyVec.push_back(new Enemy(spawnPos));
 }

@@ -1,31 +1,42 @@
-#include "Enemy.h"
+ï»¿#include "Enemy.h"
 
 Enemy::Enemy(POS pos)
 	: Object(pos, 'a', Layer::Enemy, SortingLayerID::Agent)
 {
 	AstarPathFinder::GetInstance()->Grid.GetNode(_pos)->IsWalkable = false;
-	_targetPos = { -1, -1 };
-	_moveDir = { 0, 1 };
-	_lastMovedTime = -9999;
+	_moveDir = POS::right;
+	_lastMovedTime = clock();
+	_moveInterval = 1000;
 }
 
 void Enemy::Update()
 {
+	Move();
+}
+
+void Enemy::Move()
+{
 	clock_t currentTime = clock();
-	if (currentTime - _lastMovedTime >= 1000)
+	if (currentTime - _lastMovedTime >= _moveInterval)
 	{
 		_lastMovedTime = currentTime;
-		_targetPath = AstarPathFinder::GetInstance()->GetPath(_pos, _targetPos);
-		
+
 		if (_targetPath.empty() == false)
 		{
-			_moveDir = _targetPath.top() - _pos;
-			LayerMask::GetInstance()->Move(_pos, _targetPath.top(), _layer);
-			SortingLayer::GetInstance()->Move(_pos, _targetPath.top(), _sortingLayer);
+			_moveDir = _nextPos - _pos;
+			LayerMask::GetInstance()->Move(_pos, _nextPos, _layer);
+			SortingLayer::GetInstance()->Move(_pos, _nextPos, _sortingLayer);
 			AstarPathFinder::GetInstance()->Grid.GetNode(_pos)->IsWalkable = true;
-			_pos = _targetPath.top();
+			_pos = _nextPos;
 			AstarPathFinder::GetInstance()->Grid.GetNode(_pos)->IsWalkable = false;
 			_targetPath.pop();
+		}
+
+		_targetPath = AstarPathFinder::GetInstance()->GetPath(_pos, *_targetPos);
+		if (_targetPath.size() > 0)
+		{
+			SortingLayer::GetInstance()->Move(_nextPos, _targetPath.top(), SortingLayerID::EnemyNext);
+			_nextPos = _targetPath.top();
 		}
 	}
 }
@@ -35,13 +46,20 @@ void Enemy::Render()
 	Gotoxy(_pos.x * 2, _pos.y);
 	SetColor((int)COLOR::LIGHT_RED);
 	if (_moveDir == POS::up)
-		cout << "¡â";
+		cout << (_moveInterval == 1000 ? "â–³" : "â–²");
 	else if (_moveDir == POS::left)
-		cout << "¢·";
+		cout << (_moveInterval == 1000 ? "â—" : "â—€");
 	else if (_moveDir == POS::right)
-		cout << "¢¹";
+		cout << (_moveInterval == 1000 ? "â–·" : "â–¶");
 	else if (_moveDir == POS::down)
-		cout << "¡ä";
+		cout << (_moveInterval == 1000 ? "â–½" : "â–¼");
+
+	if (_nextPos != POS::zero && SortingLayer::GetInstance()->Mask(_nextPos) <= (int)SortingLayerID::EnemyNext)
+	{
+		SetColor((int)COLOR::RED);
+		Gotoxy(_nextPos.x * 2, _nextPos.y);
+		cout << "ã†";
+	}
 	SetColor();
 }
 
@@ -49,10 +67,23 @@ void Enemy::Die()
 {
 	LayerMask::GetInstance()->RemoveMask(_pos, _layer);
 	SortingLayer::GetInstance()->RemoveLayer(_pos, _sortingLayer);
+	SortingLayer::GetInstance()->RemoveLayer(_nextPos, SortingLayerID::EnemyNext);
 	AstarPathFinder::GetInstance()->Grid.GetNode(_pos)->IsWalkable = true;
 }
 
-void Enemy::SetDestination(POS targetPos)
+void Enemy::SetDestination(PPOS targetPos)
 {
 	_targetPos = targetPos;
+	_targetPath = AstarPathFinder::GetInstance()->GetPath(_pos, *_targetPos);
+	if (_targetPath.empty() == false)
+	{
+		_nextPos = _targetPath.top();
+		_moveDir = _nextPos - _pos;
+		SortingLayer::GetInstance()->Move(_nextPos, _nextPos, SortingLayerID::EnemyNext);
+	}
+}
+
+void Enemy::SetMoveInterval(const int& value)
+{
+	_moveInterval = value;
 }

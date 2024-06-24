@@ -4,7 +4,7 @@
 
 enum class Layer
 {
-	Default, Wall, Enemy, Count
+	Default, Wall, Enemy, Item, Count
 };
 
 class LayerMask
