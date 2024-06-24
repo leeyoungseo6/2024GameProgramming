@@ -1,23 +1,24 @@
 #include "Timer.h"
+#include "MapManager.h"
+#include <Windows.h>
 
 Timer* Timer::Instance = nullptr;
 
 void Timer::StartTimer(int sTime)
 {
-    time = sTime;
+    timer = sTime;
+    start = clock();
+    end = 0;
 }
 
 bool Timer::UpdateTimer()
-{
-    clock_t start = clock();
-    clock_t end = clock();
-
+ {
     end = clock();
-    if (double(end - start) / CLOCKS_PER_SEC >= time) {
-        std::cout << "しいしししししししししししししししししししししししししししししししししししししししししししし";
+    if (double(end - start) / CLOCKS_PER_SEC >= timer) 
+    {
+        //MapManager::GetInstance()->RetryCurrentStage();
         return true;
     }
 
     return false;
 }
-
