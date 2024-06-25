@@ -146,6 +146,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlusTimeItem.h" />
     <ClInclude Include="Pos.h" />
     <ClInclude Include="ReduceSpeedItem.h" />
     <ClInclude Include="SortingLayer.h" />
@@ -168,6 +169,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlusTimeItem.cpp" />
     <ClCompile Include="Pos.cpp" />
     <ClCompile Include="ReduceSpeedItem.cpp" />
     <ClCompile Include="SortingLayer.cpp" />

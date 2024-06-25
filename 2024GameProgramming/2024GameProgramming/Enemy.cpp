@@ -3,7 +3,7 @@
 Enemy::Enemy(POS pos)
 	: Object(pos, 'a', Layer::Enemy, SortingLayerID::Agent)
 {
-	AstarPathFinder::GetInstance()->Grid.GetNode(_pos)->IsWalkable = false;
+	AStarPathFinder::GetInstance()->Grid.GetNode(_pos)->IsWalkable = false;
 	_moveDir = POS::right;
 	_lastMovedTime = clock();
 	_moveInterval = 1000;
@@ -26,13 +26,13 @@ void Enemy::Move()
 			_moveDir = _nextPos - _pos;
 			LayerMask::GetInstance()->Move(_pos, _nextPos, _layer);
 			SortingLayer::GetInstance()->Move(_pos, _nextPos, _sortingLayer);
-			AstarPathFinder::GetInstance()->Grid.GetNode(_pos)->IsWalkable = true;
+			AStarPathFinder::GetInstance()->Grid.GetNode(_pos)->IsWalkable = true;
 			_pos = _nextPos;
-			AstarPathFinder::GetInstance()->Grid.GetNode(_pos)->IsWalkable = false;
+			AStarPathFinder::GetInstance()->Grid.GetNode(_pos)->IsWalkable = false;
 			_targetPath.pop();
 		}
 
-		_targetPath = AstarPathFinder::GetInstance()->GetPath(_pos, *_targetPos);
+		_targetPath = AStarPathFinder::GetInstance()->GetPath(_pos, *_targetPos);
 		if (_targetPath.size() > 0)
 		{
 			SortingLayer::GetInstance()->Move(_nextPos, _targetPath.top(), SortingLayerID::EnemyNext);
@@ -68,13 +68,13 @@ void Enemy::Die()
 	LayerMask::GetInstance()->RemoveMask(_pos, _layer);
 	SortingLayer::GetInstance()->RemoveLayer(_pos, _sortingLayer);
 	SortingLayer::GetInstance()->RemoveLayer(_nextPos, SortingLayerID::EnemyNext);
-	AstarPathFinder::GetInstance()->Grid.GetNode(_pos)->IsWalkable = true;
+	AStarPathFinder::GetInstance()->Grid.GetNode(_pos)->IsWalkable = true;
 }
 
 void Enemy::SetDestination(PPOS targetPos)
 {
 	_targetPos = targetPos;
-	_targetPath = AstarPathFinder::GetInstance()->GetPath(_pos, *_targetPos);
+	_targetPath = AStarPathFinder::GetInstance()->GetPath(_pos, *_targetPos);
 	if (_targetPath.empty() == false)
 	{
 		_nextPos = _targetPath.top();

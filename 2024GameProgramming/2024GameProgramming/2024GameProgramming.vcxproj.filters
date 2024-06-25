@@ -99,17 +99,20 @@
     <ClInclude Include="ObjectManager.h">
       <Filter>헤더 파일\Core</Filter>
     </ClInclude>
-    <ClInclude Include="ReduceSpeedItem.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>헤더 파일\Object\Item</Filter>
     </ClInclude>
-    <ClInclude Include="AnyAttackItem.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PlusTimeItem.h">
+      <Filter>헤더 파일\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ReduceSpeedItem.h">
+      <Filter>헤더 파일\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="AnyAttackItem.h">
+      <Filter>헤더 파일\Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PlusTimeItem.cpp">
+      <Filter>소스 파일\Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

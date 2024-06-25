@@ -1,7 +1,22 @@
 #include "Item.h"
 
-Item::Item(POS pos)
+Item::Item(POS pos, string symbol, int color)
 	: Object(pos, 'a', Layer::Item, SortingLayerID::Agent)
 {
+	_symbol = symbol;
+	_color = color;
+}
 
+void Item::Render()
+{
+	SetColor(_color);
+	Gotoxy(_pos.x * 2, _pos.y);
+	cout << _symbol;
+	SetColor();
+}
+
+void Item::GetItem()
+{
+	LayerMask::GetInstance()->RemoveMask(_pos, _layer);
+	SortingLayer::GetInstance()->RemoveLayer(_pos, _sortingLayer);
 }
