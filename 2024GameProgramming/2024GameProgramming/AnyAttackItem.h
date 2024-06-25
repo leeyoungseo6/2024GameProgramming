@@ -5,7 +5,7 @@ class AnyAttackItem : public Item
 {
 public:
 	AnyAttackItem(POS pos);
-	void GetItem() override;
+	virtual void GetItem() override;
 	static int duration;
 };
 

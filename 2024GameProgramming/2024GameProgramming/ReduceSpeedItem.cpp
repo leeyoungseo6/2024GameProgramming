@@ -11,6 +11,5 @@ ReduceSpeedItem::ReduceSpeedItem(POS pos)
 void ReduceSpeedItem::GetItem()
 {
 	ObjectManager::GetInstance()->ReduceEnemySpeed();
-	LayerMask::GetInstance()->RemoveMask(_pos, _layer);
-	SortingLayer::GetInstance()->RemoveLayer(_pos, _sortingLayer);
+	Item::GetItem();
 }

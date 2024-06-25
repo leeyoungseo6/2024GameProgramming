@@ -5,7 +5,7 @@ class PlusTimeItem : public Item
 {
 public:
 	PlusTimeItem(POS pos);
-	void GetItem() override;
+	virtual void GetItem() override;
 	static int duration;
 };
 

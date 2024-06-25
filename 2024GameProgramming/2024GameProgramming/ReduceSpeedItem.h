@@ -6,7 +6,7 @@ class ReduceSpeedItem : public Item
 {
 public:
 	ReduceSpeedItem(POS pos);
-	void GetItem() override;
+	virtual void GetItem() override;
 	static int duration;
 };
 
