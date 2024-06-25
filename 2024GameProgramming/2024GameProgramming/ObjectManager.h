@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Item.h"
+#include "PlusTimeItem.h"
 #include "ReduceSpeedItem.h"
 #include "AnyAttackItem.h"
 

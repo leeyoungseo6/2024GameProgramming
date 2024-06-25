@@ -1,14 +1,14 @@
 #include "AStarPathFinder.h"
-AstarPathFinder* AstarPathFinder::pInst = nullptr;
+AStarPathFinder* AStarPathFinder::pInst = nullptr;
 
-bool AstarPathFinder::Init()
+bool AStarPathFinder::Init()
 {
 	Grid = AStarGrid();
 	Grid.CreateGrid();
 	return true;
 }
 
-stack<POS> AstarPathFinder::GetPath(const POS& startPos, const POS& targetPos)
+stack<POS> AStarPathFinder::GetPath(const POS& startPos, const POS& targetPos)
 {
 	AStarNode* startNode = Grid.GetNode(startPos);
 	AStarNode* targetNode = Grid.GetNode(targetPos);

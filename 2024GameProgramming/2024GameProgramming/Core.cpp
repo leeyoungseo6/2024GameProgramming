@@ -1,7 +1,6 @@
 #include "Core.h"
 #include "ObjectManager.h"
 #include "Timer.h"
-
 Core* Core::pInst = nullptr;
 
 bool Core::Init()
@@ -11,7 +10,7 @@ bool Core::Init()
 	if (!Title::GetInstance()->Init()) {
 		return false;
 	}
-	AstarPathFinder::GetInstance()->Init();
+	AStarPathFinder::GetInstance()->Init();
 	MapManager::GetInstance()->Init();
 	LayerMask::GetInstance()->Init();
 	ObjectManager::GetInstance()->Init();

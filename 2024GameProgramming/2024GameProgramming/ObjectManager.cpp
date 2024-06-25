@@ -58,6 +58,7 @@ void ObjectManager::EnemyUpdate()
 				(*iter)->Die();
 				delete (*iter);
 				iter = _enemyVec.erase(iter);
+				SpawnItem(enemyPos);
 
 				if (_enemyVec.empty())
 				{
@@ -116,15 +117,16 @@ void ObjectManager::SpawnEnemy(const POS& spawnPos)
 
 void ObjectManager::SpawnItem(const POS& spawnPos)
 {
-	int rd = rand() % 100;
+	int rd = rand() % 35;
 	if (rd < 100)
 	{
-		rd = rand() % 2;
+		rd = rand() % 3;
 		if (rd < 1)
-			_itemVec.push_back(new ReduceSpeedItem(spawnPos));
+			_itemVec.push_back(new PlusTimeItem(spawnPos));
 		else if (rd < 2)
+			_itemVec.push_back(new ReduceSpeedItem(spawnPos));
+		else if (rd < 3)
 			_itemVec.push_back(new AnyAttackItem(spawnPos));
-
 	}
 }
 
@@ -133,7 +135,7 @@ void ObjectManager::SpawnItem(const POS& spawnPos, OBJ_TYPE type)
 	switch (type)
 	{
 	case OBJ_TYPE::PLUSTIMEITEM: 
-		_itemVec.push_back(new ReduceSpeedItem(spawnPos));
+		_itemVec.push_back(new PlusTimeItem(spawnPos));
 		break;
 	case OBJ_TYPE::REDUCEDSPEEDITEM:
 		_itemVec.push_back(new ReduceSpeedItem(spawnPos));

@@ -3,17 +3,9 @@
 int ReduceSpeedItem::duration = 3000;
 
 ReduceSpeedItem::ReduceSpeedItem(POS pos)
-	: Item(pos)
+	: Item(pos, "¡Ø", (int)COLOR::LIGHT_GREEN)
 {
 
-}
-
-void ReduceSpeedItem::Render()
-{
-	SetColor((int)COLOR::LIGHT_GREEN);
-	Gotoxy(_pos.x * 2, _pos.y);
-	cout << "¡Ø";
-	SetColor();
 }
 
 void ReduceSpeedItem::GetItem()

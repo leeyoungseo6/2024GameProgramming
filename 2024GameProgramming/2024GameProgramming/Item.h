@@ -4,9 +4,12 @@
 class Item : public Object
 {
 public:
-	Item(POS pos);
+	Item(POS pos, string symbol, int color);
 	void Update() override {};
-	virtual void Render() abstract;
-	virtual void GetItem() abstract;
+	void Render();
+	virtual void GetItem();
+private:
+	string _symbol;
+	int _color;
 };
 

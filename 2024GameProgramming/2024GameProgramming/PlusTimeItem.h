@@ -1,10 +1,10 @@
 #pragma once
 #include "Item.h"
 
-class AnyAttackItem : public Item
+class PlusTimeItem : public Item
 {
 public:
-	AnyAttackItem(POS pos);
+	PlusTimeItem(POS pos);
 	void GetItem() override;
 	static int duration;
 };
