@@ -16,6 +16,7 @@ public:
 	bool Init();
 	void Run();
 	void Render();
+	void GameEnd();
 private:
 	void Update();
 	void FrameSync(unsigned int frameRate);

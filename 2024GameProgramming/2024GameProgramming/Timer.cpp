@@ -1,5 +1,6 @@
 #include "Timer.h"
 #include "MapManager.h"
+#include "Core.h"
 #include <Windows.h>
 
 Timer* Timer::Instance = nullptr;
@@ -13,10 +14,11 @@ void Timer::StartTimer(int sTime)
 
 bool Timer::UpdateTimer()
  {
+    if (start == 0) return false;
     end = clock();
     if (double(end - start) / CLOCKS_PER_SEC >= timer) 
     {
-        //MapManager::GetInstance()->RetryCurrentStage();
+        Core::GetInstance()->GameEnd();
         return true;
     }
 

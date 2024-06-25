@@ -11,7 +11,6 @@ Player::Player(POS pos)
 
 void Player::Update()
 {
-	if (_isDead) return;
 	Move();
 }
 
@@ -58,7 +57,6 @@ void Player::Move()
 
 void Player::Render()
 {
-	if (_isDead) return;
 	SetColor((int)COLOR::LIGHT_YELLOW);
 	Gotoxy(_pos.x * 2, _pos.y);
 	cout << "¡Ý";
@@ -67,7 +65,6 @@ void Player::Render()
 
 void Player::Die()
 {
-	_isDead = true;
 	LayerMask::GetInstance()->RemoveMask(_pos, _layer);
 	SortingLayer::GetInstance()->RemoveLayer(_pos, _sortingLayer);
 }

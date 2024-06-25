@@ -23,11 +23,11 @@ public:
 	void GetItem(const POS& pos);
 	void ReduceEnemySpeed();
 	void EnableAnyAttack();
+	void PlayerDie();
+	void EnemyDie();
 private:
 	void EnemyUpdate();
 	void ItemUpdate();
-	void PlayerDie();
-	void EnemyDie();
 	void ClearItem();
 public:
 	static ObjectManager* GetInstance()
