@@ -3,20 +3,20 @@
 #include "Pos.h"
 #include "AstarGrid.h"
 
-class AstarPathFinder
+class AStarPathFinder
 {
 private:
-	AstarPathFinder() = default;
-	~AstarPathFinder() {};
+	AStarPathFinder() = default;
+	~AStarPathFinder() {};
 public:
 	bool Init();
 private:
-	static AstarPathFinder* pInst;
+	static AStarPathFinder* pInst;
 public:
-	static AstarPathFinder* GetInstance()
+	static AStarPathFinder* GetInstance()
 	{
 		if (pInst == nullptr)
-			pInst = new AstarPathFinder;
+			pInst = new AStarPathFinder;
 		return pInst;
 	}
 	static void DestroyInstance()
