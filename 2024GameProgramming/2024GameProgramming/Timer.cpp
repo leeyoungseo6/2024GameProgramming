@@ -16,7 +16,7 @@ bool Timer::UpdateTimer()
     end = clock();
     if (double(end - start) / CLOCKS_PER_SEC >= timer) 
     {
-        //MapManager::GetInstance()->RetryCurrentStage();
+        MapManager::GetInstance()->RetryCurrentStage();
         return true;
     }
 
