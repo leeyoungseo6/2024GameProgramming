@@ -1,11 +1,13 @@
 #pragma once
 #include <conio.h>
+#include <math.h>
 #include "Object.h"
 
 struct RaycastHit
 {
 	POS point;
 	int distance;
+	int layer;
 };
 
 class Player : public Object
