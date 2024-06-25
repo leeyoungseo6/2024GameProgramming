@@ -22,3 +22,8 @@ bool Timer::UpdateTimer()
 
     return false;
 }
+
+void Timer::AddTime(int time)
+{
+    timer += time;
+}
