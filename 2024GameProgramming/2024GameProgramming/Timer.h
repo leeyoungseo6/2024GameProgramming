@@ -22,4 +22,5 @@ public:
 public:
 	void StartTimer(int sTime);
 	bool UpdateTimer();
+	void AddTime(int time);
 };
