@@ -25,7 +25,6 @@ public:
 	bool Init();
 	MENU MenuRender();
 	KEY KeyController();
-	void EnterAnimation();
 };
 
 using std::wcout;

@@ -40,5 +40,6 @@ public:
 private:
 	void LoadMap(std::string name);
 	void SaveMap();
+	void EnterAnimation();
 
 };
