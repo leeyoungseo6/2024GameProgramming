@@ -9,7 +9,7 @@
 Title* Title::Instance = nullptr;
 
 bool Title::Init() {
-	PlayBGM(TEXT("bgm.mp3"), 1000);
+	PlayBGM(TEXT("bgm.mp3"), 300);
 	while (true) { // 게임 룰을 볼때 다시 타이틀로 돌아올 수 있어야하기 때문에
 		TitleRenderer();
 		MENU eNeum = MenuRender();

@@ -38,7 +38,7 @@ void MapManager::LoadMap(std::string name)
 
 	std::fstream readMap(name);
 	if (readMap.is_open()) {
-		for (int i = 0; i < MAP_HEIGHT; ++i) {
+		for (int i = 2; i < MAP_HEIGHT + 2; ++i) {
 			// 다시 getline으로 읽을 때 기본꺼를 clear 해야함(여러 스테이지일 경우)
 			readMap.clear();
 			readMap.getline(_arrMap[i], MAP_WIDTH);
@@ -49,9 +49,9 @@ void MapManager::LoadMap(std::string name)
 				for (int j = 0; j < MAP_WIDTH; ++j)
 				{
 					if (_arrMap[i][j] == (char)OBJ_TYPE::PLAYERPOS)
-						ObjectManager::GetInstance()->SpawnPlayer({ j, i });
+						ObjectManager::GetInstance()->SpawnPlayer({ j, i});
 					if (_arrMap[i][j] == (char)OBJ_TYPE::WALL)
-						LayerMask::GetInstance()->AddMask({ j, i }, Layer::Wall); // 레이캐스트를 위해 벽 있는 곳에 레이어 추가
+						LayerMask::GetInstance()->AddMask({ j, i}, Layer::Wall); // 레이캐스트를 위해 벽 있는 곳에 레이어 추가
 				}
 			}
 		}
@@ -64,11 +64,11 @@ void MapManager::LoadMap(std::string name)
 		int time = std::stoi(name);
 		Timer::GetInstance()->StartTimer(time);
 
-		for (int i = 0; i < MAP_HEIGHT; ++i) {
+		for (int i = 2; i < MAP_HEIGHT + 2; ++i) {
 			for (int j = 0; j < MAP_WIDTH; ++j)
 			{
 				if (_arrMap[i][j] == (char)OBJ_TYPE::ENEMYPOS)
-					ObjectManager::GetInstance()->SpawnEnemy({ j, i });
+					ObjectManager::GetInstance()->SpawnEnemy({ j, i});
 			}
 		}
 	}
@@ -108,9 +108,9 @@ void MapManager::RetryCurrentStage()
  
 void MapManager::Render()
 {
-	for (int i = 0; i < MAP_HEIGHT; ++i) {
+	for (int i = 2; i < MAP_HEIGHT + 2; ++i) {
 		for (int j = 0; j < MAP_WIDTH; ++j) {
-			if (SortingLayer::GetInstance()->Mask({ j, i }) > 0) // 상위 레이어가 있는 곳엔 맵을 그리지 않음
+			if (SortingLayer::GetInstance()->Mask({ j, i}) > 0) // 상위 레이어가 있는 곳엔 맵을 그리지 않음
 				continue;
 
 			Gotoxy(j * 2, i);

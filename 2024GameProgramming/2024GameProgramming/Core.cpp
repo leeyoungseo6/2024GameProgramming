@@ -12,7 +12,6 @@ bool Core::Init()
 	}
 	AStarPathFinder::GetInstance()->Init();
 	ObjectManager::GetInstance()->Init();
-	ObjectManager::GetInstance()->SpawnItem({ 3, 1 });
 	MapManager::GetInstance()->Init();
 	LayerMask::GetInstance()->Init();
 	return true;
@@ -39,6 +38,7 @@ void Core::Update()
 void Core::Render()
 {
 	MapManager::GetInstance()->Render();
+	Timer::GetInstance()->Render();
 	ObjectManager::GetInstance()->Render();
 }
 
@@ -46,7 +46,6 @@ void Core::GameEnd()
 {
 	ObjectManager::GetInstance()->PlayerDie();
 	ObjectManager::GetInstance()->EnemyDie();
-	MapManager::GetInstance()->RetryCurrentStage();
 }
 
 void Core::FrameSync(unsigned int frameRate)

@@ -26,7 +26,7 @@ private:
 	static MapManager* Instance;
 
 public:
-	char _arrMap[MAP_HEIGHT][MAP_WIDTH] = {};
+	char _arrMap[MAP_HEIGHT + 2][MAP_WIDTH] = {};
 
 	void Init();
 
