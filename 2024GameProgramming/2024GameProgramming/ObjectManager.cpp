@@ -65,6 +65,7 @@ void ObjectManager::EnemyUpdate()
 					Core::GetInstance()->Render();
 					Sleep(1000);
 					PlayerDie();
+					ClearItem();
 					MapManager::GetInstance()->NextStage();
 					return;
 				}
@@ -75,6 +76,7 @@ void ObjectManager::EnemyUpdate()
 				PlayerDie();
 				Sleep(1000);
 				EnemyDie();
+				ClearItem();
 				return;
 			}
 		}
@@ -88,6 +90,7 @@ void ObjectManager::EnemyUpdate()
 			PlayerDie();
 			Sleep(1000);
 			EnemyDie();
+			ClearItem();
 			return;
 		}
 	}
@@ -190,4 +193,14 @@ void ObjectManager::EnemyDie()
 	_enemyVec.clear();
 
 	MapManager::GetInstance()->RetryCurrentStage();
+}
+
+void ObjectManager::ClearItem()
+{
+	for (auto item : _itemVec)
+	{
+		LayerMask::GetInstance()->RemoveMask(item->GetPos(), Layer::Item);
+		SortingLayer::GetInstance()->RemoveLayer(item->GetPos(), SortingLayerID::Agent);
+	}
+	_itemVec.clear();
 }

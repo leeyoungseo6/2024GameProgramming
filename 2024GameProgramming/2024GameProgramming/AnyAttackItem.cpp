@@ -11,4 +11,5 @@ AnyAttackItem::AnyAttackItem(POS pos)
 void AnyAttackItem::GetItem()
 {
 	ObjectManager::GetInstance()->EnableAnyAttack();
+	Item::GetItem();
 }

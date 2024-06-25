@@ -28,6 +28,7 @@ private:
 	void ItemUpdate();
 	void PlayerDie();
 	void EnemyDie();
+	void ClearItem();
 public:
 	static ObjectManager* GetInstance()
 	{
