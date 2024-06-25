@@ -70,7 +70,6 @@ MENU Title::MenuRender() {
 			break;
 		case KEY::SPACE:
 			if (yDefault == y) {
-				EnterAnimation();
 				return MENU::START;
 			}
 			if (yDefault + 2 == y) {
@@ -99,39 +98,5 @@ KEY Title::KeyController()
 	return KEY::FALL;
 }
 
-void Title::EnterAnimation()
-{
-	COORD Resolution = GetConsoleResolution();
 
-	int width = Resolution.X;
-	int height = Resolution.Y;
-	int animationtime = 10;
-	// 5번 깜빡거리기
-	for (int i = 0; i < 5; i++) {
-		Gotoxy(0, 0);
-		SetColor((int)COLOR::BLACK, (int)COLOR::WHITE);
-		system("cls");
-		Sleep(animationtime);
-
-		Gotoxy(0, 0);
-		SetColor((int)COLOR::WHITE);
-		system("cls");
-		Sleep(animationtime);
-	}
-	// 크로스
-	SetColor((int)COLOR::BLACK, (int)COLOR::WHITE);
-	for (int i = 0; i < width / 2; i++) {
-		for (int j = 0; j < height; j += 2) {
-			Gotoxy(i * 2, j);
-			cout << "  ";
-		}
-		for (int j = 1; j < height; j += 2) {
-			Gotoxy(width - 2 - i * 2, j);
-			cout << "  ";
-		}
-		Sleep(animationtime);
-	}
-	SetColor((int)COLOR::WHITE);
-	system("cls");
-}
 

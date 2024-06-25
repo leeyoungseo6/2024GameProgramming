@@ -34,6 +34,8 @@ void MapManager::LoadMap(std::string name)
 {
 	LayerMask::GetInstance()->RemoveMask(Layer::Wall); // 세 맵을 로드할 때 기존에 있던 레이어 삭제
 
+	EnterAnimation();
+
 	std::fstream readMap(name);
 	if (readMap.is_open()) {
 		for (int i = 0; i < MAP_HEIGHT; ++i) {
@@ -104,7 +106,6 @@ void MapManager::RetryCurrentStage()
 	ReadFile();
 }
  
-
 void MapManager::Render()
 {
 	for (int i = 0; i < MAP_HEIGHT; ++i) {
@@ -128,4 +129,40 @@ void MapManager::Render()
 		}
 		cout << endl;
 	}
+}
+
+void MapManager::EnterAnimation()
+{
+	COORD Resolution = GetConsoleResolution();
+
+	int width = Resolution.X;
+	int height = Resolution.Y;
+	int animationtime = 10;
+	// 5번 깜빡거리기
+	for (int i = 0; i < 5; i++) {
+		Gotoxy(0, 0);
+		SetColor((int)COLOR::BLACK, (int)COLOR::WHITE);
+		system("cls");
+		Sleep(animationtime);
+
+		Gotoxy(0, 0);
+		SetColor((int)COLOR::WHITE);
+		system("cls");
+		Sleep(animationtime);
+	}
+	// 크로스
+	SetColor((int)COLOR::BLACK, (int)COLOR::WHITE);
+	for (int i = 0; i < width / 2; i++) {
+		for (int j = 0; j < height; j += 2) {
+			Gotoxy(i * 2, j);
+			cout << "  ";
+		}
+		for (int j = 1; j < height; j += 2) {
+			Gotoxy(width - 2 - i * 2, j);
+			cout << "  ";
+		}
+		Sleep(animationtime);
+	}
+	SetColor((int)COLOR::WHITE);
+	system("cls");
 }
