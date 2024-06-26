@@ -112,6 +112,7 @@ void MapManager::SaveMap() // 클리어하면 저장할거
 
 void MapManager::RetryCurrentStage()
 {
+	PlaySFX(TEXT("fail.wav"));
 	ReadFile();
 }
 
