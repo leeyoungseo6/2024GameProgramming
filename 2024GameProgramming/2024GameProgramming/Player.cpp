@@ -17,7 +17,6 @@ void Player::Update()
 void Player::Move()
 {
 	_dir = POS::zero;
-	fflush(stdin);
 	if (GetAsyncKeyState('W') & 0x0001) _dir = POS::up;
 	else if (GetAsyncKeyState('A') & 0x0001) _dir = POS::left;
 	else if (GetAsyncKeyState('S') & 0x0001) _dir = POS::down;
