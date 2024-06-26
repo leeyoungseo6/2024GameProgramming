@@ -9,6 +9,6 @@ PlusTimeItem::PlusTimeItem(POS pos)
 
 void PlusTimeItem::GetItem()
 {
-	Timer::GetInstance()->AddTime(5000);
+	Timer::GetInstance()->AddTime(5);
 	Item::GetItem();
 }
