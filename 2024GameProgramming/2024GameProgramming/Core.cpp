@@ -20,13 +20,15 @@ bool Core::Init()
 
 void Core::Run()
 {
-	Init();
-	while (true)
+	if (Init())
 	{
-		Update();
-		Gotoxy(0, 0);
-		Render();
-		FrameSync(60);
+		while (true)
+		{
+			Update();
+			Gotoxy(0, 0);
+			Render();
+			FrameSync(60);
+		}
 	}
 }
 
