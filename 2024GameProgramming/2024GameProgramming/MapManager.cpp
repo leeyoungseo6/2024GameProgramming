@@ -1,10 +1,12 @@
-﻿#include "MapManager.h"
-#include "Title.h"
-#include "ObjectManager.h"
-#include "Timer.h"
-#include <string>
+﻿#include <string>
 #include <fcntl.h>
 #include <io.h>
+#include "MapManager.h"
+#include "Title.h"
+#include "ObjectManager.h"
+#include "Core.h"
+#include "Timer.h"
+#include "mci.h"
 
 MapManager* MapManager::Instance = nullptr;
 bool MapManager::CheckRoad(POS pos) // 현재 내 위치가 로드인지 아닌지 확인하는 함수
@@ -77,14 +79,13 @@ void MapManager::LoadMap(std::string name)
 		}
 	}
 	else{ // 더이상 존재하는 스테이지가 없을 경우
-		if (AllStageClear()) {
-			ReadFile();
-		}
+		Core::GetInstance()->isFinish = true;
 	}
 }
 
 void MapManager::NextStage() // 다음 스테이지로 넘어감
 {
+	PlaySFX(TEXT("victory.mp3"));
 	SaveMap(); // 다음맵이름으로 저장하고
 	ReadFile();
 }
@@ -202,6 +203,7 @@ bool MapManager::AllStageClear()
 		ClearStage eNeum = MenuRender();
 		switch (eNeum) {
 		case ClearStage::Return:
+			ReadFile();
 			return true;
 		case ClearStage::QUIT:
 			return false;
@@ -249,7 +251,7 @@ ClearStage MapManager::MenuRender()
 			if (yDefault == y) {
 				return ClearStage::Return;
 			}
-			if (yDefault + 2 == y) {
+			if (yDefault + 1 == y) {
 				return ClearStage::QUIT;
 			}
 			break;

@@ -36,6 +36,7 @@ public:
 	void ReadFile();
 	void NextStage();
 	void RetryCurrentStage();
+	bool AllStageClear();
 
 	bool CheckRoad(POS player);
 	void Render();
@@ -45,6 +46,5 @@ private:
 	void SaveMap();
 	void EnterAnimation();
 	void ClearRender();
-	bool AllStageClear();
 	ClearStage MenuRender();
 };
