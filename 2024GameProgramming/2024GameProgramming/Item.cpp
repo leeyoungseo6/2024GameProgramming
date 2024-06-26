@@ -1,4 +1,5 @@
 #include "Item.h"
+#include "mci.h"
 
 Item::Item(POS pos, string symbol, int color)
 	: Object(pos, 'a', Layer::Item, SortingLayerID::Item)
@@ -20,4 +21,5 @@ void Item::GetItem()
 {
 	LayerMask::GetInstance()->RemoveMask(_pos, _layer);
 	SortingLayer::GetInstance()->RemoveLayer(_pos, _sortingLayer);
+	PlaySFX(TEXT("item.mp3"));
 }

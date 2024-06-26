@@ -20,7 +20,8 @@ bool Core::Init()
 
 void Core::Run()
 {
-	if (Init()) {
+	if (Init())
+	{
 		while (true)
 		{
 			Update();
@@ -32,7 +33,6 @@ void Core::Run()
 			}
 		}
 	}
-	system("cls");
 }
  
 
