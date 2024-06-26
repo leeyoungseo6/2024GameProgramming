@@ -17,6 +17,7 @@ public:
 	void Run();
 	void Render();
 	void GameEnd();
+	bool FinishGame();
 private:
 	void Update();
 	void FrameSync(unsigned int frameRate);
@@ -31,6 +32,8 @@ public:
 	{
 		SAFE_DELETE(pInst);
 	}
+public:
+	bool isFinish = false;
 private:
 	static Core* pInst;
 };

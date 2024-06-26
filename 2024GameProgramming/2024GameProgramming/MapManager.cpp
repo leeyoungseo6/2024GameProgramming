@@ -1,6 +1,7 @@
 ﻿#include "MapManager.h"
 #include "Title.h"
 #include "ObjectManager.h"
+#include "Core.h"
 #include "Timer.h"
 #include <string>
 #include <fcntl.h>
@@ -77,9 +78,7 @@ void MapManager::LoadMap(std::string name)
 		}
 	}
 	else{ // 더이상 존재하는 스테이지가 없을 경우
-		if (AllStageClear()) {
-			ReadFile();
-		}
+		Core::GetInstance()->isFinish = true;
 	}
 }
 
@@ -202,6 +201,7 @@ bool MapManager::AllStageClear()
 		ClearStage eNeum = MenuRender();
 		switch (eNeum) {
 		case ClearStage::Return:
+			ReadFile();
 			return true;
 		case ClearStage::QUIT:
 			return false;
@@ -249,7 +249,7 @@ ClearStage MapManager::MenuRender()
 			if (yDefault == y) {
 				return ClearStage::Return;
 			}
-			if (yDefault + 2 == y) {
+			if (yDefault + 1 == y) {
 				return ClearStage::QUIT;
 			}
 			break;

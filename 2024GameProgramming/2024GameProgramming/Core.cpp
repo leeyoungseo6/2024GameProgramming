@@ -27,10 +27,14 @@ void Core::Run()
 			Gotoxy(0, 0);
 			Render();
 			FrameSync(60);
+			if (FinishGame()) {
+				break;
+			}
 		}
 	}
 	system("cls");
 }
+ 
 
 void Core::Update()
 {
@@ -49,6 +53,18 @@ void Core::GameEnd()
 {
 	ObjectManager::GetInstance()->PlayerDie();
 	ObjectManager::GetInstance()->EnemyDie();
+}
+
+bool Core::FinishGame()
+{
+	if (!isFinish) {
+		return false;
+	}
+	if (!MapManager::GetInstance()->AllStageClear()) {
+		isFinish = false;
+		return true;
+	}
+	return false;
 }
 
 void Core::FrameSync(unsigned int frameRate)
