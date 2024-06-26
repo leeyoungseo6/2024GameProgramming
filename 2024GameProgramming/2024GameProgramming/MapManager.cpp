@@ -200,7 +200,7 @@ bool MapManager::AllStageClear()
 {
 	std::ofstream writeFile("SaveStageData.txt", std::ios_base::ate);
 	if (writeFile.is_open()) {
-		writeFile << "stage-20";
+		writeFile << "stage-1";
 	}
 	writeFile.close();
 	while (true) { // 게임 룰을 볼때 다시 타이틀로 돌아올 수 있어야하기 때문에
