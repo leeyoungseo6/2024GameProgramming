@@ -6,7 +6,7 @@ Enemy::Enemy(POS pos)
 	AStarPathFinder::GetInstance()->Grid.GetNode(_pos)->IsWalkable = false;
 	_moveDir = POS::right;
 	_lastMovedTime = clock();
-	_moveInterval = 1000;
+	_moveInterval = 750;
 }
 
 void Enemy::Update()
@@ -20,6 +20,8 @@ void Enemy::Move()
 	if (currentTime - _lastMovedTime >= _moveInterval)
 	{
 		_lastMovedTime = currentTime;
+		if (AStarPathFinder::GetInstance()->Grid.GetNode(_nextPos)->IsWalkable == false)
+			return;
 
 		if (_targetPath.empty() == false)
 		{
@@ -32,7 +34,10 @@ void Enemy::Move()
 			_targetPath.pop();
 		}
 
-		_targetPath = AStarPathFinder::GetInstance()->GetPath(_pos, *_targetPos);
+
+		stack<POS> path = AStarPathFinder::GetInstance()->GetPath(_pos, *_targetPos);
+		if (path.size() > 0)
+			_targetPath = path;
 		if (_targetPath.size() > 0)
 		{
 			SortingLayer::GetInstance()->Move(_nextPos, _targetPath.top(), SortingLayerID::EnemyNext);
@@ -46,13 +51,13 @@ void Enemy::Render()
 	Gotoxy(_pos.x * 2, _pos.y);
 	SetColor((int)COLOR::LIGHT_RED);
 	if (_moveDir == POS::up)
-		cout << (_moveInterval == 1000 ? "△" : "▲");
+		cout << (_moveInterval == 750 ? "△" : "▲");
 	else if (_moveDir == POS::left)
-		cout << (_moveInterval == 1000 ? "◁" : "◀");
+		cout << (_moveInterval == 750 ? "◁" : "◀");
 	else if (_moveDir == POS::right)
-		cout << (_moveInterval == 1000 ? "▷" : "▶");
+		cout << (_moveInterval == 750 ? "▷" : "▶");
 	else if (_moveDir == POS::down)
-		cout << (_moveInterval == 1000 ? "▽" : "▼");
+		cout << (_moveInterval == 750 ? "▽" : "▼");
 
 	if (_nextPos != POS::zero && SortingLayer::GetInstance()->Mask(_nextPos) <= (int)SortingLayerID::EnemyNext)
 	{

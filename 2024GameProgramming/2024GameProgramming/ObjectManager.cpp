@@ -167,7 +167,7 @@ void ObjectManager::ReduceEnemySpeed()
 {
 	_isSpeedReduced = ReduceSpeedItem::duration;
 	for (auto enemy : _enemyVec)
-		enemy->SetMoveInterval(2000);
+		enemy->SetMoveInterval(1500);
 }
 
 void ObjectManager::EnableAnyAttack()
