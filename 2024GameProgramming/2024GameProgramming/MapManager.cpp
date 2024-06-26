@@ -31,7 +31,7 @@ void MapManager::ReadFile()
 			std::cout << "file error" << endl;
 		}
 		std::string name(stage);
-		LoadMap(name + ".txt");
+		LoadMap(name);
 	}
 }
 
@@ -39,10 +39,14 @@ void MapManager::LoadMap(std::string name)
 {
 	LayerMask::GetInstance()->RemoveMask(Layer::Wall); // 세 맵을 로드할 때 기존에 있던 레이어 삭제
 
-	std::fstream readMap(name);
+	std::fstream readMap(name + ".txt");
 	if (readMap.is_open()) {
 		EnterAnimation();
-		std::fill_n(&_arrMap[0][0], MAP_WIDTH * MAP_HEIGHT, 0);
+
+		Gotoxy(20, 0);
+		cout << name.substr(6) << " / 20";
+
+ 		std::fill_n(&_arrMap[0][0], MAP_WIDTH * MAP_HEIGHT, 0);
 		for (int i = 2; i < MAP_HEIGHT + 2; ++i) {
 			// 다시 getline으로 읽을 때 기본꺼를 clear 해야함(여러 스테이지일 경우)
 			readMap.clear();
@@ -184,11 +188,11 @@ void MapManager::ClearRender()
 
 	int prevmode = _setmode(_fileno(stdout), _O_U16TEXT); // wcout으로 변경
 
-	wcout << L"██████   █████   ██████ ██   ██ ███████ ████████  █████  ██████  " << endl;
-	wcout << L"██   ██ ██   ██ ██      ██  ██  ██         ██    ██   ██ ██   ██ " << endl;
-	wcout << L"██████  ███████ ██      █████   ███████    ██    ███████ ██████  " << endl;
-	wcout << L"██   ██ ██   ██ ██      ██  ██       ██    ██    ██   ██ ██   ██ " << endl;
-	wcout << L"██████  ██   ██  ██████ ██   ██ ███████    ██    ██   ██ ██████  " << endl;
+	wcout << L" ██████ ██      ███████  █████  ██████  ██ " << endl;
+	wcout << L"██      ██      ██      ██   ██ ██   ██ ██ " << endl;	
+	wcout << L"██      ██      █████   ███████ ██████  ██ " << endl;
+	wcout << L"██      ██      ██      ██   ██ ██   ██	  " << endl;
+	wcout << L" ██████ ███████ ███████ ██   ██ ██   ██ ██ " << endl;
 
 	int curmode = _setmode(_fileno(stdout), prevmode); // cout으로 변경
 }
@@ -219,7 +223,7 @@ ClearStage MapManager::MenuRender()
 	int y = Resoultion.Y / 3;
 	int yDefault = y;
 	Gotoxy(Resoultion.X / 8, y - 2);
-	cout << "축하합니다! 모든 스테이지를 클리어하셨습니다";
+	cout << "축하합니다! 모든 스테이지를 클리어하셨습니다!";
 	Gotoxy(x, y);
 	cout << "다시하기";
 	Gotoxy(x, y + 1);

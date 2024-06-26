@@ -33,7 +33,7 @@ void Timer::Render()
     int y = Resoulution.Y / 3;
 
     Gotoxy(0, 0);
-    cout << "남은 시간 : " << timer - (end - start) / CLOCKS_PER_SEC << "초    ";
+    cout << "남은 시간 : " << timer - (end - start) / CLOCKS_PER_SEC << "초 ";
 }
 
 void Timer::AddTime(int time)
