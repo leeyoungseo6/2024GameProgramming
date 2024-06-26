@@ -12,7 +12,6 @@ bool Core::Init()
 	}
 	AStarPathFinder::GetInstance()->Init();
 	ObjectManager::GetInstance()->Init();
-	//ObjectManager::GetInstance()->SpawnItem({ 3, 3 });
 	MapManager::GetInstance()->Init();
 	LayerMask::GetInstance()->Init();
 	return true;
@@ -38,8 +37,8 @@ void Core::Run()
 
 void Core::Update()
 {
-	ObjectManager::GetInstance()->Update();
 	Timer::GetInstance()->UpdateTimer();
+	ObjectManager::GetInstance()->Update();
 }
 
 void Core::Render()
