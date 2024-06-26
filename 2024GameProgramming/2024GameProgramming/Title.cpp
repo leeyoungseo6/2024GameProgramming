@@ -72,14 +72,14 @@ MENU Title::MenuRender() {
 			if (yDefault == y) {
 				return MENU::START;
 			}
-			if (yDefault + 2 == y) {
+			if (yDefault + 1 == y) {
 				return MENU::QUIT;
 			}
 			break;
 		}
 	}
 
-	return MENU::INFO;
+	return MENU::QUIT;
 }
 
 KEY Title::KeyController()
@@ -97,6 +97,3 @@ KEY Title::KeyController()
 	}
 	return KEY::FALL;
 }
-
-
-

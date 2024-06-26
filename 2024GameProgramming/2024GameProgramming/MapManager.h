@@ -8,6 +8,9 @@
 #include "Pos.h"
 #include "console.h"
 
+enum class ClearStage {
+	Return='0', QUIT
+};
 enum class OBJ_TYPE {
 	WALL='0', ROAD, PLAYERPOS, ENEMYPOS, PLUSTIMEITEM, REDUCEDSPEEDITEM, ANYATTACKITEM
 };
@@ -41,5 +44,7 @@ private:
 	void LoadMap(std::string name);
 	void SaveMap();
 	void EnterAnimation();
-
+	void ClearRender();
+	bool AllStageClear();
+	ClearStage MenuRender();
 };
