@@ -97,6 +97,3 @@ KEY Title::KeyController()
 	}
 	return KEY::FALL;
 }
-
-
-

@@ -19,14 +19,16 @@ bool Core::Init()
 
 void Core::Run()
 {
-	Init();
-	while (true)
-	{
-		Update();
-		Gotoxy(0, 0);
-		Render();
-		FrameSync(60);
+	if (Init()) {
+		while (true)
+		{
+			Update();
+			Gotoxy(0, 0);
+			Render();
+			FrameSync(60);
+		}
 	}
+	system("cls");
 }
 
 void Core::Update()
