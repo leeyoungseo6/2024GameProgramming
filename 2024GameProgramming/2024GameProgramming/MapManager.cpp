@@ -1,11 +1,12 @@
-﻿#include "MapManager.h"
+﻿#include <string>
+#include <fcntl.h>
+#include <io.h>
+#include "MapManager.h"
 #include "Title.h"
 #include "ObjectManager.h"
 #include "Core.h"
 #include "Timer.h"
-#include <string>
-#include <fcntl.h>
-#include <io.h>
+#include "mci.h"
 
 MapManager* MapManager::Instance = nullptr;
 bool MapManager::CheckRoad(POS pos) // 현재 내 위치가 로드인지 아닌지 확인하는 함수
@@ -84,6 +85,7 @@ void MapManager::LoadMap(std::string name)
 
 void MapManager::NextStage() // 다음 스테이지로 넘어감
 {
+	PlaySFX(TEXT("victory.mp3"));
 	SaveMap(); // 다음맵이름으로 저장하고
 	ReadFile();
 }
