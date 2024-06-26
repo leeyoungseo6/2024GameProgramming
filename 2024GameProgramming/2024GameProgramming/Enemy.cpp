@@ -17,7 +17,7 @@ void Enemy::Update()
 void Enemy::Move()
 {
 	clock_t currentTime = clock();
-	if (currentTime - _lastMovedTime >= _moveInterval)
+	if (currentTime - _lastMovedTime >= 500)
 	{
 		_lastMovedTime = currentTime;
 
