@@ -6,7 +6,7 @@
 
 enum class SortingLayerID
 {
-	BG, EnemyNext, Agent, Top, Count
+	BG, EnemyNext, Item, Agent, Top, Count
 };
 
 class SortingLayer

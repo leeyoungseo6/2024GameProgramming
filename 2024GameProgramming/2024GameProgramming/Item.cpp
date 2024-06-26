@@ -1,7 +1,7 @@
 #include "Item.h"
 
 Item::Item(POS pos, string symbol, int color)
-	: Object(pos, 'a', Layer::Item, SortingLayerID::Agent)
+	: Object(pos, 'a', Layer::Item, SortingLayerID::Item)
 {
 	_symbol = symbol;
 	_color = color;
@@ -11,7 +11,8 @@ void Item::Render()
 {
 	SetColor(_color);
 	Gotoxy(_pos.x * 2, _pos.y);
-	cout << _symbol;
+	if (SortingLayer::GetInstance()->Mask(_pos) <= (int)_sortingLayer)
+		cout << _symbol;
 	SetColor();
 }
 
