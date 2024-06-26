@@ -34,7 +34,7 @@ void Player::Move()
 		LayerMask::GetInstance()->Move(_pos, nextPos, _layer);
 		SortingLayer::GetInstance()->Move(_pos, nextPos, _sortingLayer);
 
-		if (Raycast(_pos, _dir, &hit, hit.distance, 1 << (int)Layer::Item))
+		if (Raycast(_pos, _dir, &hit, hit.distance + 1, 1 << (int)Layer::Item))
 			ObjectManager::GetInstance()->GetItem(hit.point);
 
 		_pos = nextPos;
