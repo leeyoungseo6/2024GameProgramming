@@ -25,10 +25,10 @@ public:
 	void EnableAnyAttack();
 	void PlayerDie();
 	void EnemyDie();
+	void ClearItem();
 private:
 	void EnemyUpdate();
 	void ItemUpdate();
-	void ClearItem();
 public:
 	static ObjectManager* GetInstance()
 	{

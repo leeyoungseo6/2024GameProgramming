@@ -17,24 +17,10 @@ void Player::Update()
 void Player::Move()
 {
 	_dir = POS::zero;
-	if (_kbhit())
-	{
-		char c = _getch();
-		switch (c)
-		{
-		case 'W':
-		case 'w': _dir = POS::up; break;
-
-		case 'A':
-		case 'a': _dir = POS::left; break;
-
-		case 'S':
-		case 's': _dir = POS::down; break;
-
-		case 'D':
-		case 'd': _dir = POS::right; break;
-		}
-	}
+	if (GetAsyncKeyState('W') & 0x0001) _dir = POS::up;
+	else if (GetAsyncKeyState('A') & 0x0001) _dir = POS::left;
+	else if (GetAsyncKeyState('S') & 0x0001) _dir = POS::down;
+	else if (GetAsyncKeyState('D') & 0x0001) _dir = POS::right;
 	else return;
 
 	RaycastHit hit;
@@ -42,7 +28,7 @@ void Player::Move()
 	{
 		if (hit.layer == (int)Layer::Enemy)
 			PlaySFX(TEXT("enemyDie.wav"));
-		else
+		else if (hit.distance > 0)
 			PlaySFX(TEXT("wallKick.wav"));
 		POS nextPos = hit.point - _dir;
 		LayerMask::GetInstance()->Move(_pos, nextPos, _layer);
@@ -72,7 +58,7 @@ void Player::Die()
 bool Player::Raycast(const POS& origin, const POS& dir, RaycastHit* hit, int maxDistance, int layer)
 {
 	hit->point = origin;
-	hit->distance = 0;
+	hit->distance = -1;
 	while (0 <= hit->point.x && hit->point.x <= MAP_WIDTH - 2
 		&& 0 <= hit->point.y && hit->point.y <= MAP_HEIGHT - 1 && maxDistance--)
 	{

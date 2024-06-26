@@ -53,6 +53,7 @@ void Core::GameEnd()
 {
 	ObjectManager::GetInstance()->PlayerDie();
 	ObjectManager::GetInstance()->EnemyDie();
+	ObjectManager::GetInstance()->ClearItem();
 }
 
 bool Core::FinishGame()
