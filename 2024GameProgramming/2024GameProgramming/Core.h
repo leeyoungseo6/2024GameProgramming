@@ -33,7 +33,7 @@ public:
 		SAFE_DELETE(pInst);
 	}
 public:
-	bool isFinish = false;
+	bool isAllClearStage = false;
 private:
 	static Core* pInst;
 };
