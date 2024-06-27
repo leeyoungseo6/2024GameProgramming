@@ -57,11 +57,14 @@ void Core::GameEnd()
 
 bool Core::FinishGame()
 {
-	if (!isFinish) {
+	if (!isAllClearStage) {
 		return false;
 	}
-	if (!MapManager::GetInstance()->AllStageClear()) {
-		isFinish = false;
+	if (MapManager::GetInstance()->AllStageClear()) {
+		isAllClearStage = false;
+		return false;
+	}
+	else {
 		return true;
 	}
 	return false;

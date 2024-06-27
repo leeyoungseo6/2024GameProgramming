@@ -83,7 +83,7 @@ void MapManager::LoadMap(std::string name)
 		}
 	}
 	else{ // 더이상 존재하는 스테이지가 없을 경우
-		Core::GetInstance()->isFinish = true;
+		Core::GetInstance()->isAllClearStage = true;
 	}
 }
 
@@ -93,7 +93,6 @@ void MapManager::NextStage() // 다음 스테이지로 넘어감
 	SaveMap(); // 다음맵이름으로 저장하고
 	ReadFile();
 }
-
 void MapManager::SaveMap() // 클리어하면 저장할거
 {
 	int newNum = 0;
@@ -113,13 +112,11 @@ void MapManager::SaveMap() // 클리어하면 저장할거
 	}
 	writeFile.close();
 }
-
 void MapManager::RetryCurrentStage()
 {
 	PlaySFX(TEXT("fail.wav"));
 	ReadFile();
 }
-
  
 void MapManager::Render()
 {
@@ -145,7 +142,6 @@ void MapManager::Render()
 		cout << endl;
 	}
 }
-
 void MapManager::EnterAnimation()
 {
 	COORD Resolution = GetConsoleResolution();
@@ -203,6 +199,7 @@ bool MapManager::AllStageClear()
 		writeFile << "stage-1";
 	}
 	writeFile.close();
+
 	while (true) { // 게임 룰을 볼때 다시 타이틀로 돌아올 수 있어야하기 때문에
 		ClearRender();
 		ClearStage eNeum = MenuRender();
