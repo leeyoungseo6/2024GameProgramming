@@ -7,6 +7,8 @@ bool Core::Init()
 {
 	srand((unsigned int)time(NULL));
 	CursorVisible(false, 1);
+	system("title BackStab | mode con cols=65 lines=33");
+	LockResize();
 	if (!Title::GetInstance()->Init()) {
 		return false;
 	}

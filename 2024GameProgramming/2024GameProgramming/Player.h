@@ -23,5 +23,4 @@ public:
 	const POS& GetDirection() { return _dir; };
 private:
 	POS _dir;
-	bool _isDead;
 };

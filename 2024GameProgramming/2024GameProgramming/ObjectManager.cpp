@@ -197,6 +197,8 @@ void ObjectManager::EnemyDie()
 
 void ObjectManager::ClearItem()
 {
+	_canAnyAttack = 0;
+	_isSpeedReduced = 0;
 	for (auto item : _itemVec)
 	{
 		LayerMask::GetInstance()->RemoveMask(item->GetPos(), Layer::Item);

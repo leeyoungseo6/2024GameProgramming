@@ -36,8 +36,8 @@ void Title::TitleRenderer() {
 MENU Title::MenuRender() {
 	// 시작, 정보, 나가기 출력 및 연결
 	COORD Resoultion = GetConsoleResolution();
-	int x = Resoultion.X / 4;
-	int y = Resoultion.Y / 3;
+	int x = Resoultion.X / 2.5;
+	int y = Resoultion.Y / 2.5;
 	int yDefault = y;
 
 	Gotoxy(x, y);

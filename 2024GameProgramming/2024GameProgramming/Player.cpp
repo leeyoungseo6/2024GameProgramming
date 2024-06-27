@@ -6,7 +6,6 @@ Player::Player(POS pos)
 	: Object(pos, 'a', Layer::Default, SortingLayerID::Agent)
 {
 	_dir = POS::zero;
-	_isDead = false;
 }
 
 void Player::Update()
@@ -28,13 +27,13 @@ void Player::Move()
 	{
 		if (hit.layer == (int)Layer::Enemy)
 			PlaySFX(TEXT("enemyDie.wav"));
-		else if (hit.distance > 0)
+		else if (hit.distance > 1)
 			PlaySFX(TEXT("wallKick.wav"));
 		POS nextPos = hit.point - _dir;
 		LayerMask::GetInstance()->Move(_pos, nextPos, _layer);
 		SortingLayer::GetInstance()->Move(_pos, nextPos, _sortingLayer);
 
-		if (Raycast(_pos, _dir, &hit, hit.distance + 1, 1 << (int)Layer::Item))
+		if (Raycast(_pos, _dir, &hit, hit.distance, 1 << (int)Layer::Item))
 			ObjectManager::GetInstance()->GetItem(hit.point);
 
 		_pos = nextPos;
@@ -58,7 +57,7 @@ void Player::Die()
 bool Player::Raycast(const POS& origin, const POS& dir, RaycastHit* hit, int maxDistance, int layer)
 {
 	hit->point = origin;
-	hit->distance = -1;
+	hit->distance = 0;
 	while (0 <= hit->point.x && hit->point.x <= MAP_WIDTH - 2
 		&& 0 <= hit->point.y && hit->point.y <= MAP_HEIGHT - 1 && maxDistance--)
 	{
