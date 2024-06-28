@@ -3,7 +3,7 @@
 int AnyAttackItem::duration = 3000;
 
 AnyAttackItem::AnyAttackItem(POS pos)
-	: Item(pos, "£À", (int)COLOR::LIGHT_VIOLET)
+	: Item(pos, "¢»", (int)COLOR::LIGHT_VIOLET)
 {
 
 }

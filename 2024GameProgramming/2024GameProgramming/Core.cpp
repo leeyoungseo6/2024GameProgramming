@@ -13,9 +13,9 @@ bool Core::Init()
 		return false;
 	}
 	AStarPathFinder::GetInstance()->Init();
-	ObjectManager::GetInstance()->Init();
 	MapManager::GetInstance()->Init();
 	LayerMask::GetInstance()->Init();
+	ObjectManager::GetInstance()->Init();
 	return true;
 }
 

@@ -38,6 +38,6 @@ public:
 	void Render(POS oldPos, POS newPos, string symbol, SortingLayerID layer);
 	int Mask(POS pos);
 private:
-	int _layers[(int)SortingLayerID::Count][MAP_HEIGHT][MAP_WIDTH] = { false };
+	int _layers[(int)SortingLayerID::Count][MAP_HEIGHT + 2][MAP_WIDTH] = { false };
 };
 

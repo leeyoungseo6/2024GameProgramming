@@ -26,6 +26,7 @@ public:
 	void PlayerDie();
 	void EnemyDie();
 	void ClearItem();
+	bool CanAnyAttack() { return _canAnyAttack; }
 private:
 	void EnemyUpdate();
 	void ItemUpdate();

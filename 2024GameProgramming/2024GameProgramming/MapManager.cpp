@@ -38,6 +38,8 @@ void MapManager::ReadFile()
 void MapManager::LoadMap(std::string name)
 {
 	LayerMask::GetInstance()->RemoveMask(Layer::Wall); // 세 맵을 로드할 때 기존에 있던 레이어 삭제
+	SortingLayer::GetInstance()->RemoveLayer(SortingLayerID::Agent);
+	SortingLayer::GetInstance()->RemoveLayer(SortingLayerID::Item);
 
 	std::fstream readMap(name + ".txt");
 	if (readMap.is_open()) {
@@ -59,9 +61,9 @@ void MapManager::LoadMap(std::string name)
 				for (int j = 0; j < MAP_WIDTH; ++j)
 				{
 					if (_arrMap[i][j] == (char)OBJ_TYPE::PLAYERPOS)
-						ObjectManager::GetInstance()->SpawnPlayer({ j, i});
+						ObjectManager::GetInstance()->SpawnPlayer({ j, i });
 					if (_arrMap[i][j] == (char)OBJ_TYPE::WALL)
-						LayerMask::GetInstance()->AddMask({ j, i}, Layer::Wall); // 레이캐스트를 위해 벽 있는 곳에 레이어 추가
+						LayerMask::GetInstance()->AddMask({ j, i }, Layer::Wall); // 레이캐스트를 위해 벽 있는 곳에 레이어 추가
 				}
 			}
 		}
@@ -79,7 +81,7 @@ void MapManager::LoadMap(std::string name)
 			for (int j = 0; j < MAP_WIDTH; ++j)
 			{
 				if (_arrMap[i][j] == (char)OBJ_TYPE::ENEMYPOS)
-					ObjectManager::GetInstance()->SpawnEnemy({ j, i});
+					ObjectManager::GetInstance()->SpawnEnemy({ j, i });
 			}
 		}
 	}
@@ -123,14 +125,13 @@ void MapManager::Render()
 {
 	for (int i = 2; i < MAP_HEIGHT + 2; ++i) {
 		for (int j = 0; j < MAP_WIDTH; ++j) {
-			if (SortingLayer::GetInstance()->Mask({ j, i}) > 0) // 상위 레이어가 있는 곳엔 맵을 그리지 않음
-				continue;
-
 			Gotoxy(j * 2, i);
 			if (_arrMap[i][j] == (char)OBJ_TYPE::WALL) {
 				cout << "■";
 			}
-			else if (_arrMap[i][j] == (char)OBJ_TYPE::ROAD) {
+			if (SortingLayer::GetInstance()->Mask({ j, i }) > 0) // 상위 레이어가 있는 곳엔 맵을 그리지 않음
+				continue;
+			if (_arrMap[i][j] == (char)OBJ_TYPE::ROAD) {
 				cout << "  ";
 			}
 			else if (_arrMap[i][j] == (char)OBJ_TYPE::PLAYERPOS) {

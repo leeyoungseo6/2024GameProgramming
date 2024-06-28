@@ -18,7 +18,9 @@ void LayerMask::RemoveMask(POS pos, Layer layer)
 
 void LayerMask::RemoveMask(Layer layer)
 {
-	std::fill_n(&_mask[(int)layer][0][0], MAP_WIDTH * MAP_HEIGHT * (int)layer, false);
+	for (int i = 0; i < MAP_HEIGHT + 2; i++)
+		for (int j = 0; j < MAP_WIDTH; j++)
+			_mask[(int)layer][i][j] = false;
 }
 
 void LayerMask::Move(POS oldPos, POS newPos, Layer layer)
