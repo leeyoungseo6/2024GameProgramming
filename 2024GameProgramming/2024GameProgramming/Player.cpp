@@ -42,9 +42,17 @@ void Player::Move()
 
 void Player::Render()
 {
-	SetColor((int)COLOR::LIGHT_YELLOW);
 	Gotoxy(_pos.x * 2, _pos.y);
-	cout << "¡Ý";
+	if (ObjectManager::GetInstance()->CanAnyAttack())
+	{
+		SetColor((int)COLOR::LIGHT_YELLOW);
+		cout << "¢Â";
+	}
+	else
+	{
+		SetColor((int)COLOR::LIGHT_YELLOW);
+		cout << "¡Ý";
+	}
 	SetColor();
 }
 

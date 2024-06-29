@@ -34,5 +34,5 @@ public:
 	void Move(POS oldPos, POS newPos, Layer layer);
 	int Mask(POS pos);
 private:
-	bool _mask[(int)Layer::Count][MAP_HEIGHT][MAP_WIDTH] = { false };
+	bool _mask[(int)Layer::Count][MAP_HEIGHT + 2][MAP_WIDTH] = { false };
 };

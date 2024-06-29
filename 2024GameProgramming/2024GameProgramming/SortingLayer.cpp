@@ -13,19 +13,21 @@ void SortingLayer::AddLayer(POS pos, SortingLayerID layer)
 
 void SortingLayer::RemoveLayer(POS pos, SortingLayerID layer)
 {
-	_layers[(int)layer][pos.y][pos.x] -= 1;
+	_layers[(int)layer][pos.y][pos.x] = 0;
 }
 
 void SortingLayer::RemoveLayer(SortingLayerID layer)
 {
-	std::fill_n(&_layers[(int)layer][0][0], MAP_WIDTH * MAP_HEIGHT * (int)layer, 0);
+	for (int i = 0; i < MAP_HEIGHT + 2; i++)
+		for (int j = 0; j < MAP_WIDTH; j++)
+			_layers[(int)layer][i][j] = false;
 }
 
 void SortingLayer::Move(POS oldPos, POS newPos, SortingLayerID layer)
 {
 	if (_layers[(int)layer][oldPos.y][oldPos.x] > 0)
-		_layers[(int)layer][oldPos.y][oldPos.x] -= 1;
-	_layers[(int)layer][newPos.y][newPos.x] += 1;
+		_layers[(int)layer][oldPos.y][oldPos.x] = 0;
+	_layers[(int)layer][newPos.y][newPos.x] = 1;
 }
 
 void SortingLayer::Render(POS pos, string symbol, SortingLayerID layer)

@@ -3,7 +3,7 @@
 int ReduceSpeedItem::duration = 3000;
 
 ReduceSpeedItem::ReduceSpeedItem(POS pos)
-	: Item(pos, "¡Ø", (int)COLOR::LIGHT_GREEN)
+	: Item(pos, "¢É", (int)COLOR::MINT)
 {
 
 }

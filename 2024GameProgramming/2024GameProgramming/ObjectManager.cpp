@@ -120,8 +120,8 @@ void ObjectManager::SpawnEnemy(const POS& spawnPos)
 
 void ObjectManager::SpawnItem(const POS& spawnPos)
 {
-	int rd = rand() % 35;
-	if (rd < 100)
+	int rd = rand() % 100;
+	if (rd < 35)
 	{
 		rd = rand() % 3;
 		if (rd < 1)
