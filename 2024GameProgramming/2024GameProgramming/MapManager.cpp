@@ -27,7 +27,7 @@ void MapManager::ReadFile()
 	if (file.is_open()) {
 		char stage[10];
 		file.getline(stage, 10);
-		if (file.fail()) { // 스테이지를 다 클리어
+		if (file.fail()) {
 			std::cout << "file error" << endl;
 		}
 		std::string name(stage);
@@ -46,7 +46,7 @@ void MapManager::LoadMap(std::string name)
 		Gotoxy(20, 0);
 		cout << name.substr(6) << " / 20";
 
-		//std::fill_n(&_arrMap[0][0], MAP_WIDTH * MAP_HEIGHT, 0);
+		std::fill_n(&_arrMap[0][0], MAP_WIDTH * MAP_HEIGHT, 0); // 초기화
  		
 		for (int i = 2; i < MAP_HEIGHT + 2; ++i) {
 			// 다시 getline으로 읽을 때 기본꺼를 clear 해야함(여러 스테이지일 경우)
